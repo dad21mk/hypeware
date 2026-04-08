@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Modern Fashion Store | Minimalist Collection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Oswald:wght@500;600&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#EE0000",
+              "background-light": "#FFFFFF",
+              "background-dark": "#121212",
+            },
+            fontFamily: {
+              display: ["Oswald", "sans-serif"],
+              sans: ["Inter", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0px",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      .hero-gradient {
+        background: linear-gradient(to right, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 60%);
+      }
+    </style>
+  </head>
+  <body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-sans transition-colors duration-300">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/95 dark:bg-black/95 backdrop-blur-sm border-b border-slate-100 dark:border-slate-800">
+      <div class="max-w-[1440px] mx-auto px-4 md:px-8 flex items-center justify-between h-16 md:h-20">
+        <div class="flex items-center gap-8">
+          <a class="flex-shrink-0" href="index.html">
+            <div class="bg-primary text-white p-1.5 leading-tight font-display text-xl uppercase flex flex-col items-center justify-center w-12 h-12 md:w-14 md:h-14">
+              <span>HW</span>
+              <span></span>
+            </div>
+          </a>
+          <div class="hidden lg:flex items-center space-x-8 text-sm font-semibold tracking-wide uppercase">
+            <a class="hover:text-primary transition-colors border-b-2 border-primary pb-1" href="colection.html">Wanita</a>
+            <a class="hover:text-primary transition-colors border-b-2 border-transparent hover:border-slate-200 pb-1" href="colection.html">Pria</a>
+            <a class="hover:text-primary transition-colors border-b-2 border-transparent hover:border-slate-200 pb-1" href="colection.html">Anak</a>
+            <a class="hover:text-primary transition-colors border-b-2 border-transparent hover:border-slate-200 pb-1" href="colection.html">Bayi</a>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 md:gap-6">
+          <div class="hidden md:flex items-center bg-slate-100 dark:bg-slate-800 px-4 py-2 w-64 group focus-within:ring-1 focus-within:ring-primary/50 transition-all cursor-pointer" onclick="window.location.href='search fitur.html'">
+            <span class="material-icons-outlined text-slate-400 text-lg">search</span>
+            <input
+              class="bg-transparent border-none focus:ring-0 text-sm w-full placeholder:text-slate-400 cursor-pointer"
+              placeholder="Apa yang Anda cari?"
+              type="text"
+              readonly
+            />
+          </div>
+          <div class="flex items-center gap-4">
+            <a href="#" class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+              <span class="material-icons-outlined">favorite_border</span>
+            </a>
+            <a href="customer profile.html" class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+              <span class="material-icons-outlined">person_outline</span>
+            </a>
+            <a href="keranjang.html" class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors relative">
+              <span class="material-icons-outlined">shopping_bag</span>
+              <span class="absolute top-1 right-1 bg-primary text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">1</span>
+            </a>
+            <button class="lg:hidden p-2">
+              <span class="material-icons-outlined">menu</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-[85vh] overflow-hidden bg-slate-100 dark:bg-slate-900">
+      <img
+        alt="Spring Summer Collection Lifestyle"
+        class="absolute inset-0 w-full h-full object-cover object-center"
+        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbMBicr4J8N8Gvw0z3JzZ_d9HfaOwHlgwWghRvb7kwTe1FVmoR8DD3Z9xlt2H0hTkTjz7-gcbuV8garPzMf0NKOZvfj43w-GJ7CzoLC8wxo6R2MWXTvwe6YgSUN_l3_zJbtVxk3nWDqB1pOl0lJgoXQ78SG7CYejxZQNLfDEPNJ4KPIOJh4JJ-BBuvoeP64ipjuCgLfdDoVv3NKAopcl4mXRCh0pDwiQGdny7hVsWoINIXIvtaZUTtrDZV63GtItjaC0Dvx3o-4wWd"
+      />
+      <div class="absolute inset-0 hero-gradient"></div>
+      <div class="absolute inset-0 flex flex-col justify-end md:justify-center px-6 md:px-20 pb-16 md:pb-0">
+        <div class="max-w-2xl text-white">
+          <p class="font-display uppercase tracking-[0.2em] text-sm mb-4">LifeWear Collection</p>
+          <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+            2026 Spring /<br />Summer
+          </h1>
+          <p class="text-lg md:text-xl font-light mb-10 max-w-lg opacity-90">
+            Refresh gaya Anda dengan koleksi terbaru bernuansa warna menarik dan siluet modern yang dirancang untuk kenyamanan sepanjang hari.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a class="bg-white text-black px-10 py-4 text-sm font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-all duration-300" href="#">
+              Belanja Sekarang
+            </a>
+            <a class="border border-white text-white px-10 py-4 text-sm font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300" href="#">
+              Lihat Lookbook
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="absolute right-8 top-1/2 -translate-y-1/2 hidden md:flex flex-col gap-4">
+        <div class="w-1.5 h-1.5 rounded-full bg-white"></div>
+        <div class="w-1.5 h-1.5 rounded-full bg-white/40 hover:bg-white transition-colors cursor-pointer"></div>
+        <div class="w-1.5 h-1.5 rounded-full bg-white/40 hover:bg-white transition-colors cursor-pointer"></div>
+      </div>
+    </section>
+
+    <!-- Category Bar -->
+    <section class="border-b border-slate-100 dark:border-slate-800">
+      <div class="max-w-[1440px] mx-auto overflow-x-auto no-scrollbar py-6">
+        <div class="flex justify-center min-w-max px-8 gap-12 text-xs font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400">
+          <a class="hover:text-primary" href="#">T-Shirt</a>
+          <a class="hover:text-primary" href="#">Sweat &amp; Hoodie</a>
+          <a class="hover:text-primary" href="#">Outerwear</a>
+          <a class="hover:text-primary" href="#">Rok &amp; Gaun</a>
+          <a class="hover:text-primary" href="#">Celana</a>
+          <a class="hover:text-primary" href="#">Aksesoris</a>
+          <a class="hover:text-primary text-primary" href="#">Limited Offers</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Latest Products -->
+    <section class="max-w-[1440px] mx-auto px-4 md:px-8 py-16 md:py-24">
+      <div class="flex items-end justify-between mb-12">
+        <div>
+          <h2 class="text-3xl font-bold tracking-tight mb-2">Produk Terbaru</h2>
+          <div class="h-1 w-12 bg-primary"></div>
+        </div>
+        <a class="text-sm font-bold border-b-2 border-slate-900 dark:border-white pb-1 hover:text-primary hover:border-primary transition-all" href="#">
+          Lihat Semua
+        </a>
+      </div>
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <!-- Product 1 -->
+        <div class="group cursor-pointer animate-on-scroll" onclick="window.location.href='desc.item.html'">
+          <div class="relative aspect-[3/4] mb-4 overflow-hidden bg-slate-100 dark:bg-slate-900">
+            <img
+              alt="T-Shirt Kerah Bulat Lengan Pendek"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxoPJ12JB7mACm0VPKzVs3_L8EiLV9zh9suQ0y534McH41eYyd6lB4-e2EdwUoNphfxLSsjeCoNRO388rYiV_3jh13QYIxuxlF87JZahy64O8bF0wS57MHYPG1RRYtNCVfcqC5w2ZgPCdnmYZ257M8-rOXDQQE9xVoasvZWk4fGp90wkwwqDmkeYaw57GshUp2ylVwkwiQEKYu9ais1cZfra9Txl8Dwgb-96FdTvV5Cetrr9ALPXG_ItX35pzZWBoXWP0fA-hj-qYD"
+            />
+            <div class="absolute top-3 left-3 bg-white dark:bg-black px-2 py-1 text-[10px] font-bold tracking-tighter uppercase border border-slate-200 dark:border-slate-800">
+              New
+            </div>
+            <button class="absolute bottom-4 right-4 bg-white/90 dark:bg-black/90 p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+              <span class="material-icons-outlined text-xl">favorite_border</span>
+            </button>
+          </div>
+          <div>
+            <div class="flex gap-1.5 mb-2">
+              <div class="w-4 h-4 rounded-full bg-[#f5f5dc] border border-slate-300"></div>
+              <div class="w-4 h-4 rounded-full bg-[#2c3e50] border border-slate-300"></div>
+              <div class="w-4 h-4 rounded-full bg-[#7f8c8d] border border-slate-300"></div>
+            </div>
+            <p class="text-[11px] text-slate-500 mb-1 uppercase tracking-tighter">Wanita | XS-3XL</p>
+            <h3 class="text-sm font-medium mb-2 group-hover:text-primary transition-colors">T-Shirt Kerah Bulat (Lengan Pendek)</h3>
+            <p class="font-bold">Rp199.000</p>
+          </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="group cursor-pointer animate-on-scroll" onclick="window.location.href='desc.item.html'">
+          <div class="relative aspect-[3/4] mb-4 overflow-hidden bg-slate-100 dark:bg-slate-900">
+            <img
+              alt="Jaket Parka Saku"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIvA_ZFnYFUV_y2tLi95CUNAd1aIpQeki8B6ot8N89BgzDyVjIqnLqEsrKM65jm4nio2zKMFyiRXT_I5GKhaz0fuvxFHCHlxFdoaL_WsFrhpsEh_fHynvcykHVppML-zGasuJ2vJjd1KbELOLSYW4ZS-TwtwqO5_36-OOwU1b5u7eYjwDYUF9BOfTO2JwaSkTKLJoUVkDWhfFyqIkJpsRhJe8EME0EtsWgjTUPMcil41STNM_VQhMH7sbiLcr58qaywbhtBUb16ncJ"
+            />
+            <button class="absolute bottom-4 right-4 bg-white/90 dark:bg-black/90 p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+              <span class="material-icons-outlined text-xl">favorite_border</span>
+            </button>
+          </div>
+          <div>
+            <div class="flex gap-1.5 mb-2">
+              <div class="w-4 h-4 rounded-full bg-black border border-slate-300"></div>
+              <div class="w-4 h-4 rounded-full bg-navy-900 border border-slate-300 bg-[#000080]"></div>
+            </div>
+            <p class="text-[11px] text-slate-500 mb-1 uppercase tracking-tighter">Pria | S-XXL</p>
+            <h3 class="text-sm font-medium mb-2 group-hover:text-primary transition-colors">Jaket Parka Pocketable (UV Protection)</h3>
+            <p class="font-bold">Rp599.000</p>
+          </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="group cursor-pointer animate-on-scroll" onclick="window.location.href='desc.item.html'">
+          <div class="relative aspect-[3/4] mb-4 overflow-hidden bg-slate-100 dark:bg-slate-900">
+            <img
+              alt="Celana Jeans Selvedge"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBm4sUS8wjp0Snk4bUBTW_y5DlljZuA80WNgXJvMr7M81o2hSQOg5qX1SlceqWGrbeDTYiJu9AoImPWeETYgm7WMWIEcv-XorI767fsdrXcPvi2jbfZvjOVmc8b7uHtEuXvxH9wIISqv9CW3zm7KhigZlKrhrP1GSuLAk84FmxWwqZoQCR23DeJjhJNOtcK-8ONrUi6-Oon27dvTqrK07nrOWnR6dIBzQU-ijEgF5ubc7Ngc9hAULmlLV4HT3TAxwtRPjxvnBn2cm3"
+            />
+            <div class="absolute top-3 left-3 bg-primary text-white px-2 py-1 text-[10px] font-bold tracking-tighter uppercase">Sale</div>
+            <button class="absolute bottom-4 right-4 bg-white/90 dark:bg-black/90 p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+              <span class="material-icons-outlined text-xl">favorite_border</span>
+            </button>
+          </div>
+          <div>
+            <div class="flex gap-1.5 mb-2">
+              <div class="w-4 h-4 rounded-full bg-[#1a1a1a] border border-slate-300"></div>
+            </div>
+            <p class="text-[11px] text-slate-500 mb-1 uppercase tracking-tighter">Unisex | 28-36</p>
+            <h3 class="text-sm font-medium mb-2 group-hover:text-primary transition-colors">Jeans Selvedge Slim Fit</h3>
+            <div class="flex gap-2 items-center">
+              <p class="font-bold text-primary">Rp499.000</p>
+              <p class="text-xs text-slate-400 line-through">Rp699.000</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="group cursor-pointer animate-on-scroll" onclick="window.location.href='desc.item.html'">
+          <div class="relative aspect-[3/4] mb-4 overflow-hidden bg-slate-100 dark:bg-slate-900">
+            <img
+              alt="Gaun Katun A-Line"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmxbwDAaLncpjJptFojdkNrMEMfRZs7n3CPnkncbuvPPcl_UX3T4CjQmtLPoNb76lAD9TDz1NoBN7abOQJdY-ddrj9L6iFLj3EIgw6_fG990BXRAGZrG6Lieo0HuQtSe8Vf4dlK8b8mXGqzFjCWAk0MVMfy9MslId-gxpquTpK-aCFwNdx-JGJysZKSD6dIj3pNVbUT8dFRlFSMNQGAz8ru9TprjIX_L-KImBBDlj8AxYVgz3p7a538pWyIQGg-y-EuMETpDUQ8cLU"
+            />
+            <button class="absolute bottom-4 right-4 bg-white/90 dark:bg-black/90 p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+              <span class="material-icons-outlined text-xl">favorite_border</span>
+            </button>
+          </div>
+          <div>
+            <div class="flex gap-1.5 mb-2">
+              <div class="w-4 h-4 rounded-full bg-[#e1c1c1] border border-slate-300"></div>
+              <div class="w-4 h-4 rounded-full bg-[#ffffff] border border-slate-300"></div>
+            </div>
+            <p class="text-[11px] text-slate-500 mb-1 uppercase tracking-tighter">Wanita | S-XL</p>
+            <h3 class="text-sm font-medium mb-2 group-hover:text-primary transition-colors">Gaun Flare Katun Tanpa Lengan</h3>
+            <p class="font-bold">Rp499.000</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AIRism Feature Section -->
+    <section class="bg-slate-50 dark:bg-slate-900/50 py-20">
+      <div class="max-w-[1440px] mx-auto px-4 md:px-8">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div class="order-2 lg:order-1">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6 tracking-tight">
+              Koleksi <span class="text-primary font-display uppercase">AIRism</span>
+            </h2>
+            <p class="text-lg text-slate-600 dark:text-slate-400 mb-8 leading-relaxed">
+              Teknologi kain yang memberikan kenyamanan luar biasa. Cepat kering, sejuk saat disentuh, dan sangat lembut di kulit. Cocok untuk cuaca tropis Indonesia.
+            </p>
+            <div class="grid grid-cols-2 gap-4 mb-10">
+              <div class="bg-white dark:bg-black p-6 border border-slate-100 dark:border-slate-800">
+                <span class="material-icons-outlined text-primary mb-3">ac_unit</span>
+                <h4 class="font-bold text-sm uppercase mb-2">Sejuk &amp; Segar</h4>
+                <p class="text-xs text-slate-500">Menjaga tubuh tetap dingin bahkan di hari terpanas.</p>
+              </div>
+              <div class="bg-white dark:bg-black p-6 border border-slate-100 dark:border-slate-800">
+                <span class="material-icons-outlined text-primary mb-3">speed</span>
+                <h4 class="font-bold text-sm uppercase mb-2">Cepat Kering</h4>
+                <p class="text-xs text-slate-500">Menyerap keringat seketika agar tetap kering.</p>
+              </div>
+            </div>
+            <button class="bg-black dark:bg-white dark:text-black text-white px-12 py-4 text-sm font-bold uppercase tracking-widest hover:bg-primary hover:text-white transition-all">
+              Jelajahi AIRism
+            </button>
+          </div>
+          <div class="order-1 lg:order-2 grid grid-cols-2 gap-4">
+            <img
+              alt="AIRism Model 1"
+              class="w-full h-[400px] object-cover"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDP3hVvvsjL6DohcTOUorgzJixFSKxPuP2hde5sjVcZF00lIOYg7c1R-oD19AjDLSJ3SgnVQDMfZ3ouhC7I155Mc9QUTavIv4EMg_ir4sbZD8qUuppaEpNv8OAaZC8q89Cl5P75W9iCyek4QDoa9CPtFbDix2uQSsgefkMbYSZSLHPx5E2t1aPeu0dpqN6NcjQ0F0ob7QgfLFGEoW0AWo5YTArA9Mgo6ChPIJKq1MYnPs_yIabULvbnPADquqCj7I33yfJqTJi6NLDC"
+            />
+            <img
+              alt="AIRism Detail"
+              class="w-full h-[400px] object-cover mt-8"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxWCNVOIk688MR6svGF4OMmz-P-n4fi_2WWKu3VPdwKOLAMKJcucKG7Tni-6t94zTspXqZCcEjBK5ZlPPOnyAFPL0sacoW2Yajgy3uerW79Ux9rrnVPxKjF5ZeWkhMd_g8X3OixDT6Sx7LCYPdaeLXFs669a5V_vopoWJlCtYu2GNhg45lglus30xto2Is0lE2g_N1bi_RjsZ_1uzIEA4KYrxXDeJa4FSS_Ta7QCov79rZ7I0UIT0bSfG8hXy3c8447IOXg8JHFXD5"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Collections -->
+    <section class="max-w-[1440px] mx-auto px-4 md:px-8 py-24">
+      <h2 class="text-center text-3xl font-bold mb-16 uppercase tracking-[0.3em] font-display">Koleksi Pilihan</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <a class="group relative aspect-[4/5] overflow-hidden" href="#">
+          <img
+            alt="Wanita"
+            class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAjxhxPFcmpPRLydD26rA_SBXYMFHryusRkf_8Rh50AjBGHZDGTh7LNQCY-K8DOTpHNgwlTnNb4OCXg8oqWaX59QmeBQxql3zyZ6s6trP-ZvP4JVKsZ4vbA63fjPA99hs77np6RYleO1N10QLC4-hRu919pvKFG7trsoFs5d_MCzLslaRyKWLvgwqupAsgAi-ctdGlYwFVmG5RvumKKD-HA0Sc6u6KTHPFT6Sj7aH55XtGXufE5BlBN4kULOY69PzCM-rtSIisY_BL"
+          />
+          <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors"></div>
+          <div class="absolute bottom-10 left-10">
+            <h3 class="text-white text-3xl font-bold uppercase font-display tracking-widest">Wanita</h3>
+            <p class="text-white/80 text-sm mt-2 font-medium">Lihat Koleksi →</p>
+          </div>
+        </a>
+        <a class="group relative aspect-[4/5] overflow-hidden" href="#">
+          <img
+            alt="Pria"
+            class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAn6iW3WNiEFyL4fw37D4TrlTQrI5STYQsIQPMmAjdKr3ikoVgxYuWMYTCzcNAby0XFTuMrZQsSRbcdw39L-lNbt8jnDs4FyiGRRJlDyJY3TFr1FkYp8knwm5b4DOAU3u2pdFLSCvYA0SJtGD3NdEpCpNVzTyWDWvkPQx5ipFmxJLTrZDFciJ-U02G4_EOYEer-84MFmNaGIsjJtNzzFkhZn03mDo3ANWB1xBvAutzBF1qlKA8Nthzc_M-MJwOn6lFiC2N7_8Y0FLaK"
+          />
+          <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors"></div>
+          <div class="absolute bottom-10 left-10">
+            <h3 class="text-white text-3xl font-bold uppercase font-display tracking-widest">Pria</h3>
+            <p class="text-white/80 text-sm mt-2 font-medium">Lihat Koleksi →</p>
+          </div>
+        </a>
+        <a class="group relative aspect-[4/5] overflow-hidden" href="#">
+          <img
+            alt="Anak"
+            class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKPBrq2LYp7pZVktbOlWdCIDrCig-eZmR3lyLIzCyTlv-z3C34_mJGMeaoSSdNBTn5qu3z-CUF27KL8JEOUSDrKUzJoIRm65TKI7nvkIpuRvUyZ2T9Xr2svO1NiK50YZNSzd1KIBbpSIL_sJTQY2PVBNqJw7hHkJgMoLJhAVl5Po-cv02RYPAqsdWfqsTrjrKRfSaOcjUlKde_VdmbrPIUbUqy3X6bXDi-ElCdqEsnaZz_6pvx8Ws3P6nPrHQWc95BBFAhFuh1uS2I"
+          />
+          <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors"></div>
+          <div class="absolute bottom-10 left-10">
+            <h3 class="text-white text-3xl font-bold uppercase font-display tracking-widest">Anak</h3>
+            <p class="text-white/80 text-sm mt-2 font-medium">Lihat Koleksi →</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-50 dark:bg-black pt-20 pb-10 border-t border-slate-200 dark:border-slate-800">
+      <div class="max-w-[1440px] mx-auto px-4 md:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-12 mb-16">
+          <div class="col-span-2 lg:col-span-1">
+            <div class="bg-primary text-white p-1 leading-tight font-display text-lg uppercase flex flex-col items-center justify-center w-12 h-12 mb-6">
+              <span>Hype</span>
+              <span>Ware</span>
+            </div>
+            <p class="text-xs text-slate-500 leading-relaxed mb-6">
+              Kualitas pakaian yang dibuat untuk semua orang, di mana saja, setiap hari. Filosofi kami adalah desain yang cerdas untuk hidup yang lebih baik.
+            </p>
+            <div class="flex gap-4">
+              <a class="text-slate-400 hover:text-primary transition-colors" href="#">
+                <span class="material-icons-outlined">facebook</span>
+              </a>
+              <a class="text-slate-400 hover:text-primary transition-colors" href="#">
+                <span class="material-icons-outlined">camera_alt</span>
+              </a>
+              <a class="text-slate-400 hover:text-primary transition-colors" href="#">
+                <span class="material-icons-outlined">play_circle_outline</span>
+              </a>
+            </div>
+          </div>
+          <div>
+            <h4 class="font-bold text-xs uppercase tracking-widest mb-6">Tentang</h4>
+            <ul class="space-y-4 text-sm text-slate-500 dark:text-slate-400">
+              <li><a class="hover:text-primary transition-colors" href="#">Informasi Toko</a></li>
+              <li><a class="hover:text-primary transition-colors" href="#">Karir</a></li>
+              <li><a class="hover:text-primary transition-colors" href="#">Berita</a></li>
+              <li><a class="hover:text-primary transition-colors" href="#">Keberlanjutan</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-bold text-xs uppercase tracking-widest mb-6">Bantuan</h4>
+            <ul class="space-y-4 text-sm text-slate-500 dark:text-slate-400">
+              <li><a class="hover:text-primary transition-colors" href="#">FAQ</a></li>
+              <li><a class="hover:text-primary transition-colors" href="#">Pengembalian</a></li>
+              <li><a class="hover:text-primary transition-colors" href="#">Kebijakan Privasi</a></li>
+              <li><a class="hover:text-primary transition-colors" href="#">Hubungi Kami</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-bold text-xs uppercase tracking-widest mb-6">Akun</h4>
+            <ul class="space-y-4 text-sm text-slate-500 dark:text-slate-400">
+              <li><a class="hover:text-primary transition-colors" href="#">Profil</a></li>
+              <li><a class="hover:text-primary transition-colors" href="#">Pesanan Saya</a></li>
+              <li><a class="hover:text-primary transition-colors" href="#">Wishlist</a></li>
+              <li><a class="hover:text-primary transition-colors" href="#">Membership</a></li>
+            </ul>
+          </div>
+          <div class="col-span-2 lg:col-span-1">
+            <h4 class="font-bold text-xs uppercase tracking-widest mb-6">Newsletter</h4>
+            <p class="text-xs text-slate-500 mb-4">Dapatkan info koleksi terbaru dan promo eksklusif.</p>
+            <div class="flex flex-col gap-3">
+              <input
+                class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3 text-sm focus:ring-1 focus:ring-primary outline-none"
+                placeholder="Email Anda"
+                type="email"
+              />
+              <button class="bg-black text-white dark:bg-white dark:text-black py-3 text-xs font-bold uppercase tracking-widest hover:bg-primary hover:text-white transition-all">
+                Berlangganan
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p class="text-[10px] text-slate-400 uppercase tracking-widest">© 2026 Modern Fashion Store. Hak Cipta Dilindungi.</p>
+          <div class="flex items-center gap-6">
+            <span class="text-[10px] text-slate-400 uppercase tracking-widest flex items-center gap-1">
+              <span class="material-icons-outlined text-xs">language</span> Indonesia
+            </span>
+            <button class="p-2 bg-slate-200 dark:bg-slate-800 rounded-full" id="theme-toggle">
+              <span class="material-icons-outlined text-sm block dark:hidden">dark_mode</span>
+              <span class="material-icons-outlined text-sm hidden dark:block">light_mode</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const themeToggle = document.getElementById("theme-toggle");
+      themeToggle.addEventListener("click", () => {
+        document.documentElement.classList.toggle("dark");
+      });
+      // Initialize theme based on preference or system
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.documentElement.classList.add("dark");
+      }
+      
+      // Intersection Observer for scroll animations
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('opacity-100', 'translate-y-0');
+            entry.target.classList.remove('opacity-0', 'translate-y-8');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.animate-on-scroll').forEach((el) => {
+        el.classList.add('opacity-0', 'translate-y-8', 'transition-all', 'duration-700', 'ease-out');
+        observer.observe(el);
+      });
+    </script>
+  </body>
+</html>
