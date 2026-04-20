@@ -29,66 +29,197 @@
       };
     </script>
     <style>
-      .no-scrollbar::-webkit-scrollbar {
-        display: none;
+      /* Smooth transition for Mega Menu */
+      #mega-menu {
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        transform: translateY(-10%);
+        opacity: 0;
+        pointer-events: none;
       }
-      .no-scrollbar {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
+      #mega-menu.active {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
       }
-      .hero-gradient {
-        background: linear-gradient(to right, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 60%);
+      #overlay {
+        transition: opacity 0.3s ease;
       }
     </style>
   </head>
-  <body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-sans transition-colors duration-300">
+<body class="bg-background-light dark:bg-background-dark text-black dark:text-white font-sans overflow-x-hidden transition-colors duration-300">
 
-    <!-- Navigation -->
-    <nav class="sticky top-0 z-50 bg-white/95 dark:bg-black/95 backdrop-blur-sm border-b border-slate-100 dark:border-slate-800">
-      <div class="max-w-[1440px] mx-auto px-4 md:px-8 flex items-center justify-between h-16 md:h-20">
-        <div class="flex items-center gap-8">
-          <a class="flex-shrink-0" href="index.html">
-            <div class="bg-primary text-white p-1.5 leading-tight font-display text-xl uppercase flex flex-col items-center justify-center w-12 h-12 md:w-14 md:h-14">
-              <span>HW</span>
-              <span></span>
-            </div>
-          </a>
-          <div class="hidden lg:flex items-center space-x-8 text-sm font-semibold tracking-wide uppercase">
-            <a class="hover:text-primary transition-colors border-b-2 border-primary pb-1" href="colection.html">Wanita</a>
-            <a class="hover:text-primary transition-colors border-b-2 border-transparent hover:border-slate-200 pb-1" href="colection.html">Pria</a>
-            <a class="hover:text-primary transition-colors border-b-2 border-transparent hover:border-slate-200 pb-1" href="colection.html">Anak</a>
-            <a class="hover:text-primary transition-colors border-b-2 border-transparent hover:border-slate-200 pb-1" href="colection.html">Bayi</a>
-          </div>
+    <!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>HypeWare | Modern Fashion Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#EE0000",
+              "background-light": "#FFFFFF",
+              "background-dark": "#121212",
+            },
+            fontFamily: {
+              display: ["Oswald", "sans-serif"],
+              sans: ["Inter", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      /* Smooth transition for Mega Menu */
+      #mega-menu {
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        transform: translateY(-5%);
+        opacity: 0;
+        pointer-events: none;
+      }
+      #mega-menu.active {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+      #overlay {
+        transition: opacity 0.3s ease;
+      }
+    </style>
+  </head>
+  <header>
+    <div id="overlay" class="fixed inset-0 bg-black/50 z-40 opacity-0 pointer-events-none"></div>
+
+    <header class="relative bg-white dark:bg-background-dark z-50 border-b border-gray-100 dark:border-stone-800">
+      <nav class="container mx-auto px-6 h-20 flex items-center justify-between">
+        <div class="text-2xl font-display font-bold tracking-tighter text-primary cursor-pointer">
+          HYPEWARE
         </div>
-        <div class="flex items-center gap-2 md:gap-6">
-          <div class="hidden md:flex items-center bg-slate-100 dark:bg-slate-800 px-4 py-2 w-64 group focus-within:ring-1 focus-within:ring-primary/50 transition-all cursor-pointer" onclick="window.location.href='search fitur.html'">
-            <span class="material-icons-outlined text-slate-400 text-lg">search</span>
-            <input
-              class="bg-transparent border-none focus:ring-0 text-sm w-full placeholder:text-slate-400 cursor-pointer"
-              placeholder="Apa yang Anda cari?"
-              type="text"
-              readonly
-            />
-          </div>
-          <div class="flex items-center gap-4">
-            <a href="#" class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
-              <span class="material-icons-outlined">favorite_border</span>
-            </a>
-            <a href="customer profile.html" class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
-              <span class="material-icons-outlined">person_outline</span>
-            </a>
-            <a href="keranjang.html" class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors relative">
-              <span class="material-icons-outlined">shopping_bag</span>
-              <span class="absolute top-1 right-1 bg-primary text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">1</span>
-            </a>
-            <button class="lg:hidden p-2">
-              <span class="material-icons-outlined">menu</span>
-            </button>
-          </div>
+
+        <ul class="hidden md:flex space-x-8 font-medium uppercase text-sm tracking-widest h-full items-center">
+          <li class="nav-item h-full flex items-center border-b-2 border-transparent hover:border-primary cursor-pointer transition-all" data-category="pria">Pria</li>
+          <li class="nav-item h-full flex items-center border-b-2 border-transparent hover:border-primary cursor-pointer transition-all" data-category="wanita">Wanita</li>
+          <li class="nav-item h-full flex items-center border-b-2 border-transparent hover:border-primary cursor-pointer transition-all" data-category="anak">Anak-Anak</li>
+          <li class="nav-item h-full flex items-center border-b-2 border-transparent hover:border-primary cursor-pointer transition-all" data-category="sale">Sale</li>
+        </ul>
+
+        <div class="flex items-center space-x-5">
+          <span class="material-icons-outlined cursor-pointer hover:text-primary">search</span>
+          <span class="material-icons-outlined cursor-pointer hover:text-primary">shopping_bag</span>
+          <button id="theme-toggle" class="p-2 bg-gray-100 dark:bg-stone-800 rounded-full">
+            <span class="material-icons-outlined text-sm block dark:hidden">dark_mode</span>
+            <span class="material-icons-outlined text-sm hidden dark:block">light_mode</span>
+          </button>
         </div>
+      </nav>
+
+      <div id="mega-menu" class="absolute top-20 left-0 w-full bg-white dark:bg-stone-900 shadow-2xl overflow-hidden z-50 h-[70vh]">
+        <div id="mega-menu-content" class="container mx-auto px-10 py-12 grid grid-cols-4 gap-12 opacity-0 transition-opacity duration-300">
+          </div>
       </div>
-    </nav>
+    </header>
 
+    <script>
+      // Data untuk merubah isi menu sesuai kategori
+      const categoryData = {
+        pria: {
+          featured: ["Rilisan Terbaru", "Best Sellers", "Sepatu Lari"],
+          types: ["Celana Panjang", "Jas & Blazer", "Kaos Streetwear", "Jaket"],
+          promo: "KOLEKSI PRIA MODERN",
+          img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=2071"
+        },
+        wanita: {
+          featured: ["Dress Malam", "New Arrivals", "Aksesoris"],
+          types: ["Rok & Skirts", "Busana Muslim", "Blouse", "Tas Mewah"],
+          promo: "ELEGANSI WANITA",
+          img: "https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070"
+        },
+        anak: {
+          featured: ["Pakaian Bayi", "Sepatu Sekolah"],
+          types: ["Setelan Bermain", "Topi Lucu", "Jaket Mini", "Mainan"],
+          promo: "DUNIA ANAK-ANAK",
+          img: "https://images.unsplash.com/photo-1514090458221-65bb69cf63e6?q=80&w=2070"
+        },
+        sale: {
+          featured: ["Diskon 50%", "Last Chance"],
+          types: ["Clearance Sale", "Bundle Packs", "Voucher"],
+          promo: "CUCI GUDANG BESAR",
+          img: "https://images.unsplash.com/photo-1472851294608-062f824d29cc?q=80&w=2070"
+        }
+      };
+
+      const megaMenu = document.getElementById('mega-menu');
+      const menuContent = document.getElementById('mega-menu-content');
+      const navItems = document.querySelectorAll('.nav-item');
+      const overlay = document.getElementById('overlay');
+      const themeToggle = document.getElementById("theme-toggle");
+
+      // Fungsi Mengisi Konten
+      const updateMenu = (cat) => {
+        const data = categoryData[cat];
+        menuContent.innerHTML = `
+          <div>
+            <h4 class="font-display text-lg mb-6 text-primary uppercase">Unggulan</h4>
+            <ul class="space-y-3 text-gray-600 dark:text-gray-300">
+              ${data.featured.map(item => `<li><a href="#" class="hover:text-black dark:hover:text-white transition">${item}</a></li>`).join('')}
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-display text-lg mb-6 uppercase font-bold">Kategori Produk</h4>
+            <ul class="space-y-3 text-gray-600 dark:text-gray-300">
+               ${data.types.map(item => `<li><a href="#" class="hover:text-black dark:hover:text-white transition">${item}</a></li>`).join('')}
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-display text-lg mb-6 uppercase">Inspirasi</h4>
+            <ul class="space-y-3 text-gray-600 dark:text-gray-300">
+              <li><a href="#" class="hover:text-black dark:hover:text-white transition">Gaya Musim Ini</a></li>
+              <li><a href="#" class="hover:text-black dark:hover:text-white transition">Lookbook</a></li>
+            </ul>
+          </div>
+          <div class="bg-gray-100 dark:bg-stone-800 p-6 flex flex-col justify-end relative overflow-hidden group">
+            <div class="z-10 text-white">
+              <p class="text-xs uppercase tracking-widest mb-2">Terbaru</p>
+              <h3 class="text-2xl font-display font-bold mb-4">${data.promo}</h3>
+              <a href="#" class="inline-block bg-white text-black px-6 py-2 text-sm uppercase font-bold hover:bg-primary hover:text-white transition">Lihat Semua</a>
+            </div>
+            <div class="absolute inset-0 bg-black/40 z-0"></div>
+            <div class="absolute inset-0 z-[-1] bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style="background-image: url('${data.img}')"></div>
+          </div>
+        `;
+        menuContent.classList.add('opacity-100');
+      };
+
+      // Fungsi Tampilkan/Sembunyikan
+      const showMenu = (e) => {
+        const cat = e.target.getAttribute('data-category');
+        updateMenu(cat);
+        megaMenu.classList.add('active');
+        overlay.classList.add('opacity-100', 'pointer-events-auto');
+        document.body.classList.add('overflow-hidden');
+      };
+
+      const hideMenu = () => {
+        megaMenu.classList.remove('active');
+        overlay.classList.remove('opacity-100', 'pointer-events-auto');
+        document.body.classList.remove('overflow-hidden');
+        menuContent.classList.remove('opacity-100');
+      };
+
+      // Event Listeners
+      navItems.forEach(item => item.addEventListener('mouseenter', showMenu));
+      document.querySelector('header').addEventListener('mouseleave', hideMenu);
+
+      // Dark Mode
+      themeToggle.addEventListener("click", () => document.documentElement.classList.toggle("dark"));
+    </script>
+  </header>
     <!-- Hero Section -->
     <section class="relative h-[85vh] overflow-hidden bg-slate-100 dark:bg-slate-900">
       <img
@@ -107,7 +238,10 @@
             Refresh gaya Anda dengan koleksi terbaru bernuansa warna menarik dan siluet modern yang dirancang untuk kenyamanan sepanjang hari.
           </p>
           <div class="flex flex-wrap gap-4">
-            <a class="bg-white text-black px-10 py-4 text-sm font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-all duration-300" href="#">
+            <a
+             class="bg-white text-black px-10 py-4 text-sm font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-all duration-300"
+             href="colection_pria"
+              aria-label="Belanja 2026 Spring/Summer">
               Belanja Sekarang
             </a>
             <a class="border border-white text-white px-10 py-4 text-sm font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300" href="#">
@@ -303,7 +437,7 @@
           <img
             alt="Wanita"
             class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAjxhxPFcmpPRLydD26rA_SBXYMFHryusRkf_8Rh50AjBGHZDGTh7LNQCY-K8DOTpHNgwlTnNb4OCXg8oqWaX59QmeBQxql3zyZ6s6trP-ZvP4JVKsZ4vbA63fjPA99hs77np6RYleO1N10QLC4-hRu919pvKFG7trsoFs5d_MCzLslaRyKWLvgwqupAsgAi-ctdGlYwFVmG5RvumKKD-HA0Sc6u6KTHPFT6Sj7aH55XtGXufE5BlBN4kULOY69PzCM-rtSIisY_BL"
+            <img src="/asset/gambar_wanita.jpg">
           />
           <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors"></div>
           <div class="absolute bottom-10 left-10">
@@ -315,8 +449,8 @@
           <img
             alt="Pria"
             class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAn6iW3WNiEFyL4fw37D4TrlTQrI5STYQsIQPMmAjdKr3ikoVgxYuWMYTCzcNAby0XFTuMrZQsSRbcdw39L-lNbt8jnDs4FyiGRRJlDyJY3TFr1FkYp8knwm5b4DOAU3u2pdFLSCvYA0SJtGD3NdEpCpNVzTyWDWvkPQx5ipFmxJLTrZDFciJ-U02G4_EOYEer-84MFmNaGIsjJtNzzFkhZn03mDo3ANWB1xBvAutzBF1qlKA8Nthzc_M-MJwOn6lFiC2N7_8Y0FLaK"
-          />
+            src="colection_pria"
+           <img src="/asset/gambar_pria.jpg">
           <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors"></div>
           <div class="absolute bottom-10 left-10">
             <h3 class="text-white text-3xl font-bold uppercase font-display tracking-widest">Pria</h3>
@@ -327,7 +461,7 @@
           <img
             alt="Anak"
             class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKPBrq2LYp7pZVktbOlWdCIDrCig-eZmR3lyLIzCyTlv-z3C34_mJGMeaoSSdNBTn5qu3z-CUF27KL8JEOUSDrKUzJoIRm65TKI7nvkIpuRvUyZ2T9Xr2svO1NiK50YZNSzd1KIBbpSIL_sJTQY2PVBNqJw7hHkJgMoLJhAVl5Po-cv02RYPAqsdWfqsTrjrKRfSaOcjUlKde_VdmbrPIUbUqy3X6bXDi-ElCdqEsnaZz_6pvx8Ws3P6nPrHQWc95BBFAhFuh1uS2I"
+            <img src="asset/gambar_anak.jpg">
           />
           <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors"></div>
           <div class="absolute bottom-10 left-10">
@@ -410,24 +544,14 @@
             <span class="text-[10px] text-slate-400 uppercase tracking-widest flex items-center gap-1">
               <span class="material-icons-outlined text-xs">language</span> Indonesia
             </span>
-            <button class="p-2 bg-slate-200 dark:bg-slate-800 rounded-full" id="theme-toggle">
-              <span class="material-icons-outlined text-sm block dark:hidden">dark_mode</span>
-              <span class="material-icons-outlined text-sm hidden dark:block">light_mode</span>
-            </button>
+            
           </div>
         </div>
       </div>
     </footer>
+    <script src="navbar/nav.js"></script>
 
     <script>
-      const themeToggle = document.getElementById("theme-toggle");
-      themeToggle.addEventListener("click", () => {
-        document.documentElement.classList.toggle("dark");
-      });
-      // Initialize theme based on preference or system
-      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        document.documentElement.classList.add("dark");
-      }
       
       // Intersection Observer for scroll animations
       const observer = new IntersectionObserver((entries) => {

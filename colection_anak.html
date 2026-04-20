@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Koleksi Anak | Fashion Minimalis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#ff0000",
+                        "background-light": "#ffffff",
+                        "background-dark": "#121212",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0px",
+                    },
+                },
+            },
+        };
+    </script>
+    <style>
+        body { font-family: "Inter", sans-serif; }
+        .product-card:hover .quick-add {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 transition-colors duration-200">
+    <div class="bg-stone-100 dark:bg-stone-900 py-2 text-center text-xs tracking-wider">
+        <p>Gratis Ongkir dengan min. pembelian Rp699.000</p>
+    </div>
+
+    <nav class="sticky top-0 z-50 bg-background-light dark:bg-background-dark border-b border-stone-200 dark:border-stone-800">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-8">
+                    <a href="index.html" class="bg-primary text-white p-1 font-bold text-xl leading-none tracking-tighter flex flex-col items-center w-8 h-8 justify-center">
+                        <span class="text-[14px]">HW</span>
+                    </a>
+                    <div class="hidden md:flex space-x-8 font-medium text-sm">
+                        <a class="text-stone-500 hover:text-black dark:hover:text-white transition-colors" href="colection_wanita.html">WANITA</a>
+                        <a class="text-stone-500 hover:text-black dark:hover:text-white transition-colors" href="colection_pria.html">PRIA</a>
+                        <a class="border-b-2 border-primary pb-5 -mb-5" href="colection_anak.html">ANAK</a>
+                        <a class="text-stone-500 hover:text-black dark:hover:text-white transition-colors" href="colection_bayi.html">BAYI</a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <a href="#" class="p-1 hover:opacity-70"><span class="material-icons-outlined text-xl">search</span></a>
+                    <a href="#" class="p-1 hover:opacity-70"><span class="material-icons-outlined text-xl">favorite_border</span></a>
+                    <a href="#" class="p-1 hover:opacity-70"><span class="material-icons-outlined text-xl">person_outline</span></a>
+                    <a href="keranjang.html" class="p-1 hover:opacity-70 relative inline-block">
+                        <span class="material-icons-outlined text-xl">shopping_cart</span>
+                        <span class="absolute -top-1 -right-1 bg-black dark:bg-white text-white dark:text-black text-[10px] w-4 h-4 rounded-full flex items-center justify-center">2</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="bg-background-light dark:bg-background-dark border-b border-stone-100 dark:border-stone-900 overflow-x-auto hide-scrollbar">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8 flex space-x-8 py-3 text-xs font-medium whitespace-nowrap">
+            <a class="text-stone-900 dark:text-stone-100 border-b border-stone-900 dark:border-stone-100" href="#">Koleksi Utama</a>
+            <a class="text-stone-500 hover:text-stone-900 dark:hover:text-stone-100" href="#">T-Shirt Grafis</a>
+            <a class="text-stone-500 hover:text-stone-900 dark:hover:text-stone-100" href="#">Celana Pendek & Jeans</a>
+            <a class="text-stone-500 hover:text-stone-900 dark:hover:text-stone-100" href="#">Pakaian Luar</a>
+            <a class="text-stone-500 hover:text-stone-900 dark:hover:text-stone-100" href="#">Aksesoris</a>
+        </div>
+    </div>
+
+    <main class="max-w-7xl mx-auto px-4 lg:px-8 py-8">
+        <div class="mb-8">
+            <div class="flex items-center text-[10px] text-stone-400 mb-2 uppercase tracking-widest">
+                <a href="#">Anak</a>
+                <span class="mx-2">/</span>
+                <span class="text-stone-900 dark:text-stone-100">Semua Pakaian</span>
+            </div>
+            <h1 class="text-2xl font-light tracking-tight">Koleksi Pakaian Anak</h1>
+            <p class="text-sm text-stone-500 mt-2">Ditemukan 120 produk nyaman untuk si kecil</p>
+        </div>
+
+        <div class="flex flex-col md:flex-row md:items-center justify-between border-y border-stone-200 dark:border-stone-800 py-4 mb-8 space-y-4 md:space-y-0">
+            <div class="flex flex-wrap gap-4">
+                <button class="flex items-center space-x-2 text-sm border border-stone-300 dark:border-stone-700 px-4 py-2 hover:bg-stone-50 dark:hover:bg-stone-900 transition-colors">
+                    <span>Usia (Tahun)</span>
+                    <span class="material-icons-outlined text-sm">expand_more</span>
+                </button>
+                <button class="flex items-center space-x-2 text-sm border border-stone-300 dark:border-stone-700 px-4 py-2 hover:bg-stone-50 dark:hover:bg-stone-900 transition-colors">
+                    <span>Warna Cerah</span>
+                    <span class="material-icons-outlined text-sm">expand_more</span>
+                </button>
+            </div>
+            <div class="flex items-center space-x-4 text-sm">
+                <span class="material-icons-outlined text-base">swap_vert</span>
+                <span>Terpopuler</span>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-12">
+            
+            <div class="product-card group cursor-pointer animate-on-scroll" onclick="window.location.href='desc.item.html'">
+                <div class="relative aspect-[3/4] overflow-hidden bg-stone-100 dark:bg-stone-900 mb-4">
+                    <img alt="Kaos Anak" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                    src="https://i.pinimg.com/1200x/d2/ce/c5/d2cec53cbe74fd0d560615f2704d37e7.jpg" />
+                    <div class="quick-add absolute bottom-0 left-0 right-0 bg-white/90 dark:bg-black/90 p-4 translate-y-full opacity-0 transition-all duration-300">
+                        <button class="w-full bg-black dark:bg-white text-white dark:text-black py-2 text-xs font-bold uppercase tracking-widest">Tambah Cepat</button>
+                    </div>
+                    <button class="absolute top-4 right-4 text-stone-400 hover:text-primary transition-colors">
+                        <span class="material-icons-outlined">favorite_border</span>
+                    </button>
+                </div>
+                <div class="space-y-2">
+                    <div class="flex gap-1">
+                        <div class="w-4 h-4 rounded-full border border-stone-300 bg-yellow-400"></div>
+                        <div class="w-4 h-4 rounded-full border border-stone-300 bg-blue-400"></div>
+                    </div>
+                    <p class="text-[10px] text-stone-500">Anak, 110cm - 160cm</p>
+                    <h3 class="text-sm font-medium line-clamp-1">Kaos Grafis Katun Lembut</h3>
+                    <span class="text-sm font-bold">Rp149.000</span>
+                </div>
+            </div>
+
+            <div class="product-card group cursor-pointer animate-on-scroll" onclick="window.location.href='desc.item.html'">
+                <div class="relative aspect-[3/4] overflow-hidden bg-stone-100 dark:bg-stone-900 mb-4">
+                    <img alt="Jaket Anak" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                    src="https://i.pinimg.com/1200x/9c/9b/ab/9c9bab11c594cf5ac6baf18a844dd44a.jpg" />
+                    <div class="absolute top-0 left-0 bg-primary text-white px-2 py-1 text-[10px] font-bold uppercase">Sale</div>
+                    <div class="quick-add absolute bottom-0 left-0 right-0 bg-white/90 dark:bg-black/90 p-4 translate-y-full opacity-0 transition-all duration-300">
+                        <button class="w-full bg-black dark:bg-white text-white dark:text-black py-2 text-xs font-bold uppercase tracking-widest">Tambah Cepat</button>
+                    </div>
+                </div>
+                <div class="space-y-2">
+                    <div class="flex gap-1">
+                        <div class="w-4 h-4 rounded-full border border-stone-300 bg-stone-800"></div>
+                    </div>
+                    <p class="text-[10px] text-stone-500">Anak, S - XL</p>
+                    <h3 class="text-sm font-medium line-clamp-1">Jaket Parka Ringan Tahan Air</h3>
+                    <div class="flex items-baseline space-x-2">
+                        <span class="text-sm font-bold text-primary">Rp299.000</span>
+                        <span class="text-[10px] text-stone-400 line-through">Rp499.000</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card group cursor-pointer animate-on-scroll" onclick="window.location.href='desc.item.html'">
+                <div class="relative aspect-[3/4] overflow-hidden bg-stone-100 dark:bg-stone-900 mb-4">
+                    <img alt="Kemeja Anak" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                    src="https://i.pinimg.com/1200x/b3/90/3a/b3903aba665eb12fccf09f3b9bb0abf4.jpg" />
+                    <div class="quick-add absolute bottom-0 left-0 right-0 bg-white/90 dark:bg-black/90 p-4 translate-y-full opacity-0 transition-all duration-300">
+                        <button class="w-full bg-black dark:bg-white text-white dark:text-black py-2 text-xs font-bold uppercase tracking-widest">Tambah Cepat</button>
+                    </div>
+                </div>
+                <div class="space-y-2">
+                    <p class="text-[10px] text-stone-500">Anak, 100cm - 150cm</p>
+                    <h3 class="text-sm font-medium line-clamp-1">Kemeja Linen Kerah Tegak</h3>
+                    <span class="text-sm font-bold">Rp199.000</span>
+                </div>
+            </div>
+
+            <div class="product-card group cursor-pointer animate-on-scroll" onclick="window.location.href='desc.item.html'">
+                <div class="relative aspect-[3/4] overflow-hidden bg-stone-100 dark:bg-stone-900 mb-4">
+                    <img alt="Sweatshirt Anak" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                    src="https://i.pinimg.com/736x/96/0f/49/960f49a25184930d08e504bbe2f7b38c.jpg" />
+                    <div class="quick-add absolute bottom-0 left-0 right-0 bg-white/90 dark:bg-black/90 p-4 translate-y-full opacity-0 transition-all duration-300">
+                        <button class="w-full bg-black dark:bg-white text-white dark:text-black py-2 text-xs font-bold uppercase tracking-widest">Tambah Cepat</button>
+                    </div>
+                </div>
+                <div class="space-y-2">
+                    <div class="flex gap-1">
+                        <div class="w-4 h-4 rounded-full border border-stone-300 bg-pink-300"></div>
+                        <div class="w-4 h-4 rounded-full border border-stone-300 bg-green-200"></div>
+                    </div>
+                    <p class="text-[10px] text-stone-500">Anak, All Size</p>
+                    <h3 class="text-sm font-medium line-clamp-1">Sweatshirt Hoodie Fleece</h3>
+                    <span class="text-sm font-bold">Rp249.000</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-20 flex flex-col items-center">
+            <button class="px-12 py-3 border border-stone-900 dark:border-stone-100 text-sm font-bold uppercase tracking-widest hover:bg-stone-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
+                Muat Lebih Banyak
+            </button>
+        </div>
+    </main>
+
+    <footer class="bg-stone-50 dark:bg-stone-950 border-t border-stone-200 dark:border-stone-800 mt-20 pt-16 pb-8 text-center text-[10px] text-stone-400 tracking-widest uppercase">
+        <p>© 2026 HypeWare Kids. Semua Hak Dilindungi.</p>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-8');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.animate-on-scroll').forEach((el) => {
+            el.classList.add('opacity-0', 'translate-y-8', 'transition-all', 'duration-700', 'ease-out');
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
