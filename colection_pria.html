@@ -56,7 +56,6 @@
               <a class="text-stone-500 hover:text-black dark:hover:text-white transition-colors" href="colection_wanita.html">WANITA</a>
               <a class="border-b-2 border-primary pb-5 -mb-5" href="colection_pria.html">PRIA</a>
               <a class="text-stone-500 hover:text-black dark:hover:text-white transition-colors" href="colection_anak.html">ANAK</a>
-              <a class="text-stone-500 hover:text-black dark:hover:text-white transition-colors" href="colection_bayi.html">BAYI</a>
             </div>
           </div>
           <div class="flex items-center space-x-6">
@@ -81,244 +80,115 @@
       </div>
     </nav>
 
-    <div class="bg-background-light dark:bg-background-dark border-b border-stone-100 dark:border-stone-900 overflow-x-auto hide-scrollbar">
-      <div class="max-w-7xl mx-auto px-4 lg:px-8 flex space-x-8 py-3 text-xs font-medium whitespace-nowrap">
-        <a class="text-stone-900 dark:text-stone-100 border-b border-stone-900 dark:border-stone-100" href="#">Semua Pakaian Atas</a>
-        <a class="text-stone-500 hover:text-stone-900 dark:hover:text-stone-100" href="#">T-Shirt</a>
-        <a class="text-stone-500 hover:text-stone-900 dark:hover:text-stone-100" href="#">Kemeja & Kasual</a>
-        <a class="text-stone-500 hover:text-stone-900 dark:hover:text-stone-100" href="#">Rajut & Kardigan</a>
-        <a class="text-stone-500 hover:text-stone-900 dark:hover:text-stone-100" href="#">Sweat & Hoodie</a>
-        <a class="text-stone-500 hover:text-stone-900 dark:hover:text-stone-100" href="#">UT (Graphic T-Shirt)</a>
+    <main class="max-w-7xl mx-auto px-4 py-12">
+    <div class="flex flex-col md:flex-row justify-between items-end mb-10 gap-6 border-b border-gray-100 dark:border-gray-800 pb-6">
+      <div class="flex flex-wrap gap-6">
+        <button onclick="filterAction('all')" class="filter-btn active border-b-2 border-black font-bold text-xs uppercase tracking-widest pb-1">Semua</button>
+        <button onclick="filterAction('bjp')" class="filter-btn text-gray-400 font-bold text-xs uppercase tracking-widest pb-1 hover:text-black transition">Kaos</button>
+        <button onclick="filterAction('km')" class="filter-btn text-gray-400 font-bold text-xs uppercase tracking-widest pb-1 hover:text-black transition">Kemeja</button>
+        <button onclick="filterAction('cl')" class="filter-btn text-gray-400 font-bold text-xs uppercase tracking-widest pb-1 hover:text-black transition">celana</button>
+        <button onclick="filterAction('op')" class="filter-btn text-gray-400 font-bold text-xs uppercase tracking-widest pb-1 hover:text-black transition">Outerwear</button>
       </div>
+
+      <select id="sortOption" onchange="runFilterAndSort()" class="bg-transparent border-none text-xs font-bold uppercase tracking-widest focus:ring-0 cursor-pointer">
+        <option value="newest">Urutkan: Terbaru</option>
+        <option value="low">Harga: Terendah</option>
+        <option value="high">Harga: Tertinggi</option>
+      </select>
     </div>
 
-    <main class="max-w-7xl mx-auto px-4 lg:px-8 py-8">
-      <div class="mb-8">
-        <div class="flex items-center text-[10px] text-stone-400 mb-2 uppercase tracking-widest">
-          <a href="#">Pria</a>
-          <span class="mx-2">/</span>
-          <span class="text-stone-900 dark:text-stone-100">Pakaian Atas</span>
-        </div>
-        <h1 class="text-2xl font-light tracking-tight">Koleksi T-Shirt, Sweat & Polo</h1>
-        <p class="text-sm text-stone-500 mt-2">Ditemukan 185 produk</p>
-      </div>
+    <div id="product-container" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6"></div>
+    <div id="load-more-container" class="mt-16 flex justify-center hidden">
+      <button id="load-more-btn" onclick="loadMoreAction()" class="border border-black px-10 py-4 text-[11px] font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-all duration-300">
+        Muat Lebih Banyak
+      </button>
+    </div>
+  </main>
 
-      <div class="flex flex-col md:flex-row md:items-center justify-between border-y border-stone-200 dark:border-stone-800 py-4 mb-8 space-y-4 md:space-y-0">
-        <div class="flex flex-wrap gap-4">
-          <div class="relative group">
-            <button class="flex items-center space-x-2 text-sm border border-stone-300 dark:border-stone-700 px-4 py-2 hover:bg-stone-50 dark:hover:bg-stone-900 transition-colors">
-              <span>Ukuran</span>
-              <span class="material-icons-outlined text-sm">expand_more</span>
-            </button>
-          </div>
-          <div class="relative group">
-            <button class="flex items-center space-x-2 text-sm border border-stone-300 dark:border-stone-700 px-4 py-2 hover:bg-stone-50 dark:hover:bg-stone-900 transition-colors">
-              <span>Warna</span>
-              <span class="material-icons-outlined text-sm">expand_more</span>
-            </button>
-          </div>
-          <div class="relative group">
-            <button class="flex items-center space-x-2 text-sm border border-stone-300 dark:border-stone-700 px-4 py-2 hover:bg-stone-50 dark:hover:bg-stone-900 transition-colors">
-              <span>Harga</span>
-              <span class="material-icons-outlined text-sm">expand_more</span>
-            </button>
-          </div>
-        </div>
-        <div class="flex items-center space-x-4">
-          <button class="flex items-center space-x-2 text-sm">
-            <span class="material-icons-outlined text-base">swap_vert</span>
-            <span>Pilih Berdasarkan</span>
+  <script src="colectiondata/colection_pria.js"></script>
+  
+<script>
+  let activeFilter = 'all';
+  let itemsLimit = 8; // Batas awal item yang tampil
+  let filteredData = []; // Menyimpan data yang sudah difilter
+
+  function renderItems(list) {
+    const container = document.getElementById('product-container');
+    const loadMoreContainer = document.getElementById('load-more-container');
+    
+    if (!list || list.length === 0) {
+      container.innerHTML = `<p class="col-span-full text-center py-20 text-gray-400 uppercase tracking-widest">Produk tidak tersedia.</p>`;
+      loadMoreContainer.classList.add('hidden');
+      return;
+    }
+
+    // POTONG DATA: Hanya ambil data dari indeks 0 sampai itemsLimit
+    const visibleItems = list.slice(0, itemsLimit);
+
+    container.innerHTML = visibleItems.map(item => `
+      <div class="group animate-on-scroll">
+        <div class="relative aspect-[3/4] overflow-hidden bg-gray-100 mb-4">
+          <img src="${item.img}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+          <button onclick="window.location.href='desc.item.html?id=${item.id}'" 
+                  class="absolute bottom-0 left-0 right-0 bg-black text-white py-4 text-[10px] font-bold opacity-0 group-hover:opacity-100 transition-all uppercase">
+            Detail Produk
           </button>
         </div>
+        <h3 class="text-[11px] font-bold uppercase tracking-tight">${item.nama}</h3>
+        <p class="text-[11px] text-gray-500 mt-1">${item.harga}</p>
       </div>
+    `).join('');
 
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-12">
-        <div class="product-card group cursor-pointer animate-on-scroll" onclick="window.location.href='desc.item.html'">
-          <div class="relative aspect-[3/4] overflow-hidden bg-stone-100 dark:bg-stone-900 mb-4">
-            <img
-              alt="T-Shirt Kerah Bulat Pria"
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              src="https://down-id.img.susercontent.com/file/09a403f78b46fab1f4c5ffab4d228402"
-            />
-            <div class="quick-add absolute bottom-0 left-0 right-0 bg-white/90 dark:bg-black/90 p-4 translate-y-full opacity-0 transition-all duration-300">
-              <button class="w-full bg-black dark:bg-white text-white dark:text-black py-2 text-xs font-bold uppercase tracking-widest hover:bg-stone-800 dark:hover:bg-stone-200">
-                Tambah Cepat
-              </button>
-            </div>
-            <button class="absolute top-4 right-4 text-stone-400 hover:text-primary transition-colors">
-              <span class="material-icons-outlined">favorite_border</span>
-            </button>
-          </div>
-          <div class="space-y-2">
-            <div class="flex gap-1">
-              <div class="w-4 h-4 rounded-full border border-stone-300 bg-[#32373b]"></div>
-              <div class="w-4 h-4 rounded-full border border-stone-300 bg-[#ffffff]"></div>
-              <div class="w-4 h-4 rounded-full border border-stone-300 bg-[#e7ddd7]"></div>
-            </div>
-            <p class="text-[10px] text-stone-500">Pria, S-3XL</p>
-            <h3 class="text-sm font-medium line-clamp-1">T-Shirt Kerah Bulat Uniqlo U (Oversized)</h3>
-            <div class="flex items-baseline space-x-2">
-              <span class="text-sm font-bold">Rp199.000</span>
-            </div>
-          </div>
-        </div>
+    // LOGIKA TOMBOL: Tampilkan tombol hanya jika total barang > barang yang tampil
+    if (list.length > itemsLimit) {
+      loadMoreContainer.classList.remove('hidden');
+    } else {
+      loadMoreContainer.classList.add('hidden');
+    }
+  }
 
-        <div class="product-card group cursor-pointer animate-on-scroll" onclick="window.location.href='desc.item.html'">
-          <div class="relative aspect-[3/4] overflow-hidden bg-stone-100 dark:bg-stone-900 mb-4">
-            <img
-              alt="Kaos Polo Pria"
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              src="https://down-id.img.susercontent.com/file/sg-11134201-23020-dxlxy8lgoenv03"
-            />
-            <div class="absolute top-0 left-0 bg-primary text-white px-2 py-1 text-[10px] font-bold uppercase">Sale</div>
-            <div class="quick-add absolute bottom-0 left-0 right-0 bg-white/90 dark:bg-black/90 p-4 translate-y-full opacity-0 transition-all duration-300">
-              <button class="w-full bg-black dark:bg-white text-white dark:text-black py-2 text-xs font-bold uppercase tracking-widest">
-                Tambah Cepat
-              </button>
-            </div>
-            <button class="absolute top-4 right-4 text-stone-400 hover:text-primary transition-colors">
-              <span class="material-icons-outlined">favorite_border</span>
-            </button>
-          </div>
-          <div class="space-y-2">
-            <div class="flex gap-1">
-              <div class="w-4 h-4 rounded-full border border-stone-300 bg-[#505052]"></div>
-              <div class="w-4 h-4 rounded-full border border-stone-300 bg-[#2b334a]"></div>
-            </div>
-            <p class="text-[10px] text-stone-500">Pria, M-XXL</p>
-            <h3 class="text-sm font-medium line-clamp-1">Kaos Polo Dry Pique Lengan Pendek</h3>
-            <div class="flex items-baseline space-x-2">
-              <span class="text-sm font-bold text-primary">Rp199.000</span>
-              <span class="text-[10px] text-stone-400 line-through">Rp299.000</span>
-            </div>
-          </div>
-        </div>
+  function loadMoreAction() {
+    itemsLimit += 8; // Tambah 8 item lagi setiap diklik
+    runFilterAndSort();
+  }
 
-        <div class="product-card group cursor-pointer animate-on-scroll" onclick="window.location.href='desc.item.html'">
-          <div class="relative aspect-[3/4] overflow-hidden bg-stone-100 dark:bg-stone-900 mb-4">
-            <img
-              alt="Kemeja Flanel Pria"
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              src="https://cdn11.bigcommerce.com/s-q9ptxvukwz/images/stencil/original/products/5233/121443/5.11-tactical-mens-abr-pro-pant-74512-74512__82496.1599174610.jpg?c=2"
-            />
-            <div class="quick-add absolute bottom-0 left-0 right-0 bg-white/90 dark:bg-black/90 p-4 translate-y-full opacity-0 transition-all duration-300">
-              <button class="w-full bg-black dark:bg-white text-white dark:text-black py-2 text-xs font-bold uppercase tracking-widest">
-                Tambah Cepat
-              </button>
-            </div>
-            <button class="absolute top-4 right-4 text-stone-400 hover:text-primary transition-colors">
-              <span class="material-icons-outlined">favorite_border</span>
-            </button>
-          </div>
-          <div class="space-y-2">
-            <div class="flex gap-1">
-              <div class="w-4 h-4 rounded-full border border-stone-300 bg-[#5a6b5a]"></div>
-              <div class="w-4 h-4 rounded-full border border-stone-300 bg-[#2b334a]"></div>
-            </div>
-            <p class="text-[10px] text-stone-500">Pria, S-XL</p>
-            <h3 class="text-sm font-medium line-clamp-1"> Celana Tactical</h3>
-            <div class="flex items-baseline space-x-2">
-              <span class="text-sm font-bold">Rp399.000</span>
-            </div>
-          </div>
-        </div>
+  function filterAction(cat) {
+    activeFilter = cat;
+    itemsLimit = 8; // Reset limit setiap ganti kategori
+    
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.classList.remove('border-b-2', 'border-black', 'text-black');
+      btn.classList.add('text-gray-400');
+    });
+    event.target.classList.add('border-b-2', 'border-black', 'text-black');
+    event.target.classList.remove('text-gray-400');
 
-        <div class="product-card group cursor-pointer animate-on-scroll" onclick="window.location.href='desc.item.html'">
-          <div class="relative aspect-[3/4] overflow-hidden bg-stone-100 dark:bg-stone-900 mb-4">
-            <img
-              alt="Sweatshirt Pria"
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRE3bA4ErzfJ_OZFBXzeD8WvIPXhD0jEB3psSnsOokp8TL9Ezl2"
-            />
-            <div class="quick-add absolute bottom-0 left-0 right-0 bg-white/90 dark:bg-black/90 p-4 translate-y-full opacity-0 transition-all duration-300">
-              <button class="w-full bg-black dark:bg-white text-white dark:text-black py-2 text-xs font-bold uppercase tracking-widest">
-                Tambah Cepat
-              </button>
-            </div>
-            <button class="absolute top-4 right-4 text-stone-400 hover:text-primary transition-colors">
-              <span class="material-icons-outlined">favorite_border</span>
-            </button>
-          </div>
-          <div class="space-y-2">
-            <div class="flex gap-1">
-              <div class="w-4 h-4 rounded-full border border-stone-300 bg-[#3d424b]"></div>
-              <div class="w-4 h-4 rounded-full border border-stone-300 bg-[#f7f7f7]"></div>
-              <div class="w-4 h-4 rounded-full border border-stone-300 bg-[#59423e]"></div>
-            </div>
-            <p class="text-[10px] text-stone-500">Pria, S-3XL</p>
-            <h3 class="text-sm font-medium line-clamp-1"> Cargo Jenss</h3>
-            <div class="flex items-baseline space-x-2">
-              <span class="text-sm font-bold">Rp299.000</span>
-            </div>
-          </div>
-        </div>
-      </div>
+    runFilterAndSort();
+  }
 
-      
+  function runFilterAndSort() {
+    // 1. Ambil data asli dan filter
+    filteredData = activeFilter === 'all' 
+      ? [...dataPria] 
+      : dataPria.filter(p => p.category === activeFilter);
 
-      <div class="mt-20 flex flex-col items-center">
-        <p class="text-sm text-stone-500 mb-4">Menampilkan 4 dari 185 produk</p>
-        <div class="w-64 h-1 bg-stone-100 dark:bg-stone-900 rounded-full mb-8 relative">
-          <div class="absolute left-0 top-0 h-full w-[2.5%] bg-stone-900 dark:bg-stone-100 rounded-full"></div>
-        </div>
-        <button class="px-12 py-3 border border-stone-900 dark:border-stone-100 text-sm font-bold uppercase tracking-widest hover:bg-stone-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
-          Muat Lebih Banyak
-        </button>
-      </div>
-    </main>
+    // 2. Sort berdasarkan harga
+    const sortType = document.getElementById('sortOption').value;
+    if (sortType === 'low') {
+      filteredData.sort((a, b) => a.priceNumeric - b.priceNumeric);
+    } else if (sortType === 'high') {
+      filteredData.sort((a, b) => b.priceNumeric - a.priceNumeric);
+    }
 
-    <footer class="bg-stone-50 dark:bg-stone-950 border-t border-stone-200 dark:border-stone-800 mt-20 pt-16 pb-8">
-      <div class="max-w-7xl mx-auto px-4 lg:px-8">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
-          <div>
-            <h4 class="text-xs font-bold uppercase tracking-widest mb-6">Tentang Kami</h4>
-            <ul class="space-y-4 text-sm text-stone-500">
-              <li><a class="hover:underline" href="#">Informasi Perusahaan</a></li>
-              <li><a class="hover:underline" href="#">Karir</a></li>
-              <li><a class="hover:underline" href="#">Keberlanjutan</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 class="text-xs font-bold uppercase tracking-widest mb-6">Bantuan</h4>
-            <ul class="space-y-4 text-sm text-stone-500">
-              <li><a class="hover:underline" href="#">Kebijakan Pengembalian</a></li>
-              <li><a class="hover:underline" href="#">Status Pesanan</a></li>
-              <li><a class="hover:underline" href="#">Hubungi Kami</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 class="text-xs font-bold uppercase tracking-widest mb-6">Akun</h4>
-            <ul class="space-y-4 text-sm text-stone-500">
-              <li><a class="hover:underline" href="#">Profil</a></li>
-              <li><a class="hover:underline" href="#">Wishlist</a></li>
-              <li><a class="hover:underline" href="#">Kupon</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 class="text-xs font-bold uppercase tracking-widest mb-6">Media Sosial</h4>
-            <div class="flex space-x-4">
-              <button class="w-8 h-8 flex items-center justify-center border border-stone-300 rounded-full">
-                <span class="material-icons-outlined text-sm">facebook</span>
-              </button>
-              <button class="w-8 h-8 flex items-center justify-center border border-stone-300 rounded-full">
-                <span class="material-icons-outlined text-sm">camera_alt</span>
-              </button>
-              <button class="w-8 h-8 flex items-center justify-center border border-stone-300 rounded-full">
-                <span class="material-icons-outlined text-sm">play_circle</span>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-stone-200 dark:border-stone-800 text-[10px] text-stone-400 uppercase tracking-widest">
-          <p>© 2026 HypeWare. Semua Hak Dilindungi.</p>
-          <div class="flex space-x-8 mt-4 md:mt-0">
-            <a href="#">Ketentuan Layanan</a>
-            <a href="#">Kebijakan Privasi</a>
-            <a href="#">Aksesibilitas</a>
-          </div>
-        </div>
-      </div>
-    </footer>
+    // 3. Render
+    renderItems(filteredData);
+  }
+
+  window.onload = () => runFilterAndSort();
+</script>
+    <div id="footer-placeholder"></div>
+
+    <script src="footer.js"></script>
     <script>
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
