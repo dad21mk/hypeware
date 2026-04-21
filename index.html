@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Modern Fashion Store | Minimalist Collection</title>
+    <link rel="icon" type="image/png" href="assets/ .png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Oswald:wght@500;600&amp;display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
@@ -106,7 +107,6 @@
           <li class="nav-item h-full flex items-center border-b-2 border-transparent hover:border-primary cursor-pointer transition-all" data-category="pria">Pria</li>
           <li class="nav-item h-full flex items-center border-b-2 border-transparent hover:border-primary cursor-pointer transition-all" data-category="wanita">Wanita</li>
           <li class="nav-item h-full flex items-center border-b-2 border-transparent hover:border-primary cursor-pointer transition-all" data-category="anak">Anak-Anak</li>
-          <li class="nav-item h-full flex items-center border-b-2 border-transparent hover:border-primary cursor-pointer transition-all" data-category="sale">Sale</li>
         </ul>
 
         <div class="flex items-center space-x-5">
@@ -130,13 +130,13 @@
       const categoryData = {
         pria: {
           featured: ["Rilisan Terbaru", "Best Sellers", "Sepatu Lari"],
-          types: ["Celana Panjang", "Jas & Blazer", "Kaos Streetwear", "Jaket"],
+          types: ["kaos", "Jas & jaket", "celana", "Outerwear"],
           promo: "KOLEKSI PRIA MODERN",
           img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=2071"
         },
         wanita: {
           featured: ["Dress Malam", "New Arrivals", "Aksesoris"],
-          types: ["Rok & Skirts", "Busana Muslim", "Blouse", "Tas Mewah"],
+          types: ["baju", "dress", "celana & rok", "outerwear"],
           promo: "ELEGANSI WANITA",
           img: "https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070"
         },
@@ -145,12 +145,6 @@
           types: ["Setelan Bermain", "Topi Lucu", "Jaket Mini", "Mainan"],
           promo: "DUNIA ANAK-ANAK",
           img: "https://images.unsplash.com/photo-1514090458221-65bb69cf63e6?q=80&w=2070"
-        },
-        sale: {
-          featured: ["Diskon 50%", "Last Chance"],
-          types: ["Clearance Sale", "Bundle Packs", "Voucher"],
-          promo: "CUCI GUDANG BESAR",
-          img: "https://images.unsplash.com/photo-1472851294608-062f824d29cc?q=80&w=2070"
         }
       };
 
@@ -240,7 +234,7 @@
           <div class="flex flex-wrap gap-4">
             <a
              class="bg-white text-black px-10 py-4 text-sm font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-all duration-300"
-             href="colection_pria"
+             href="colection_pria.html"
               aria-label="Belanja 2026 Spring/Summer">
               Belanja Sekarang
             </a>
@@ -261,13 +255,12 @@
     <section class="border-b border-slate-100 dark:border-slate-800">
       <div class="max-w-[1440px] mx-auto overflow-x-auto no-scrollbar py-6">
         <div class="flex justify-center min-w-max px-8 gap-12 text-xs font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400">
-          <a class="hover:text-primary" href="#">T-Shirt</a>
-          <a class="hover:text-primary" href="#">Sweat &amp; Hoodie</a>
-          <a class="hover:text-primary" href="#">Outerwear</a>
-          <a class="hover:text-primary" href="#">Rok &amp; Gaun</a>
-          <a class="hover:text-primary" href="#">Celana</a>
-          <a class="hover:text-primary" href="#">Aksesoris</a>
-          <a class="hover:text-primary text-primary" href="#">Limited Offers</a>
+          <a class="hover:text-primary" href="colection_pria.html?cat=bjp">kaos</a>
+          <a class="hover:text-primary" href="colection_wanita.html?cat=dr">dress</a>
+          <a class="hover:text-primary" href="colection_pria.html?cat=op">Outerwear</a>
+          <a class="hover:text-primary" href="colection_wanita.html?cat=ro">Rok</a>
+          <a class="hover:text-primary" href="colection_pria.html?cat=cl">Celana</a>
+          <a class="hover:text-primary text-primary" href="colection_pria.html?cat=lo">Limited Offers</a>
         </div>
       </div>
     </section>
@@ -409,9 +402,11 @@
                 <p class="text-xs text-slate-500">Menyerap keringat seketika agar tetap kering.</p>
               </div>
             </div>
-            <button class="bg-black dark:bg-white dark:text-black text-white px-12 py-4 text-sm font-bold uppercase tracking-widest hover:bg-primary hover:text-white transition-all">
-              Jelajahi AIRism
-            </button>
+            <a href="airism.html">
+              <button class="bg-black dark:bg-white dark:text-black text-white px-12 py-4 text-sm font-bold uppercase tracking-widest hover:bg-primary hover:text-white transition-all">
+                Jelajahi AIRism
+              </button>
+            </a>
           </div>
           <div class="order-1 lg:order-2 grid grid-cols-2 gap-4">
             <img
