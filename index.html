@@ -111,7 +111,10 @@
 
         <div class="flex items-center space-x-5">
           <span class="material-icons-outlined cursor-pointer hover:text-primary">search</span>
-          <span class="material-icons-outlined cursor-pointer hover:text-primary">shopping_bag</span>
+          <a href="keranjang.html" class="relative">
+            <span class="material-icons-outlined cursor-pointer hover:text-primary">shopping_bag</span>
+            <span class="cart-badge absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+          </a>
           <button id="theme-toggle" class="p-2 bg-gray-100 dark:bg-stone-800 rounded-full">
             <span class="material-icons-outlined text-sm block dark:hidden">dark_mode</span>
             <span class="material-icons-outlined text-sm hidden dark:block">light_mode</span>
@@ -545,6 +548,7 @@
       </div>
     </footer>
     <script src="navbar/nav.js"></script>
+    <script type="module" src="produk.js"></script>
 
     <script>
       

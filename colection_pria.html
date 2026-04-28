@@ -70,7 +70,7 @@
             </a>
             <a href="keranjang.html" class="p-1 hover:opacity-70 relative inline-block">
               <span class="material-icons-outlined text-xl">shopping_cart</span>
-              <span class="absolute -top-1 -right-1 bg-black dark:bg-white text-white dark:text-black text-[10px] w-4 h-4 rounded-full flex items-center justify-center">1</span>
+              <span class="cart-badge absolute -top-1 -right-1 bg-primary text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
             </a>
             <button class="p-1 md:hidden">
               <span class="material-icons-outlined text-xl">menu</span>
@@ -105,9 +105,117 @@
     </div>
   </main>
 
+  <script type="module" src="produk.js"></script>
   <script src="colectiondata/colection_pria.js"></script>
+  <script src="footer.js"></script>
   
 <script>
+// Collection page specific functionality
+let currentFilter = 'all';
+let currentSort = 'newest';
+let displayedProducts = [];
+
+document.addEventListener('DOMContentLoaded', function() {
+    renderCollectionPage();
+    setupFilterButtons();
+});
+
+function renderCollectionPage() {
+    if (window.hypewareProducts) {
+        const priaProducts = window.hypewareProducts.getProductsByGender('pria');
+        displayedProducts = priaProducts;
+        renderFilteredProducts();
+    }
+}
+
+function renderFilteredProducts() {
+    let filteredProducts = displayedProducts;
+    
+    // Apply filter
+    if (currentFilter !== 'all') {
+        filteredProducts = displayedProducts.filter(product => product.category === currentFilter);
+    }
+    
+    // Apply sort
+    filteredProducts = sortProducts(filteredProducts, currentSort);
+    
+    // Render products
+    const container = document.getElementById('product-container');
+    if (container && window.hypewareProducts) {
+        container.innerHTML = filteredProducts.map(product => `
+            <div class="group cursor-pointer animate-on-scroll" onclick="window.hypewareProducts.viewProduct('${product.id}')">
+                <div class="relative aspect-[3/4] mb-4 overflow-hidden bg-slate-100 dark:bg-slate-900">
+                    <img
+                        alt="${product.nama}"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        src="${product.img}"
+                        loading="lazy"
+                    />
+                    <button 
+                        class="absolute bottom-4 right-4 bg-white/90 dark:bg-black/90 p-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                        onclick="event.stopPropagation(); window.hypewareProducts.addToCartQuick('${product.id}')"
+                    >
+                        <span class="material-icons-outlined text-xl">shopping_cart</span>
+                    </button>
+                </div>
+                <div>
+                    <p class="text-[11px] text-slate-500 mb-1 uppercase tracking-tighter">${product.gender} | ${getCategoryName(product.category)}</p>
+                    <h3 class="text-sm font-medium mb-2 group-hover:text-primary transition-colors">${product.nama}</h3>
+                    <p class="font-bold">${product.harga}</p>
+                </div>
+            </div>
+        `).join('');
+    }
+}
+
+function setupFilterButtons() {
+    // Update existing filter functions to work with new system
+    window.filterAction = function(category) {
+        currentFilter = category;
+        
+        // Update button states
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.classList.remove('active', 'border-black', 'text-black');
+            btn.classList.add('text-gray-400');
+        });
+        
+        event.target.classList.add('active', 'border-black', 'text-black');
+        event.target.classList.remove('text-gray-400');
+        
+        renderFilteredProducts();
+    };
+    
+    window.runFilterAndSort = function() {
+        const sortSelect = document.getElementById('sortOption');
+        currentSort = sortSelect.value;
+        renderFilteredProducts();
+    };
+}
+
+function sortProducts(products, sortType) {
+    const sorted = [...products];
+    
+    switch(sortType) {
+        case 'low':
+            return sorted.sort((a, b) => a.priceNumeric - b.priceNumeric);
+        case 'high':
+            return sorted.sort((a, b) => b.priceNumeric - a.priceNumeric);
+        case 'newest':
+        default:
+            return sorted; // Keep original order for newest
+    }
+}
+
+function getCategoryName(category) {
+    const categoryNames = {
+        'bjp': 'Kaos',
+        'km': 'Kemeja',
+        'op': 'Outerwear',
+        'cl': 'Celana'
+    };
+    return categoryNames[category] || category;
+}
+</script>
   let activeFilter = 'all';
   let itemsLimit = 8; // Batas awal item yang tampil
   let filteredData = []; // Menyimpan data yang sudah difilter
