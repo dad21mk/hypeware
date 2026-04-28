@@ -1,6 +1,11 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { resolve } from 'path'
+import { fileURLToPath } from 'url'
+import { dirname } from 'path'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 export default defineConfig({
   plugins: [react()],
@@ -19,9 +24,10 @@ export default defineConfig({
         keranjang: resolve(__dirname, 'keranjang.html'),
         customer_profile: resolve(__dirname, 'customer profile.html'),
         search: resolve(__dirname, 'search fitur.html'),
-        airi: resolve(__dirname, 'airi.html'),
-        cus: resolve(__dirname, 'cus.html'),
-        low: resolve(__dirname, 'low.html'),
+        // Skip problematic files for now
+        // airi: resolve(__dirname, 'airi.html'),
+        // cus: resolve(__dirname, 'cus.html'),
+        // low: resolve(__dirname, 'low.html'),
       },
     },
     outDir: 'dist',
