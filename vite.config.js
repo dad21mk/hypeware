@@ -15,7 +15,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
-        studio: resolve(__dirname, 'custome/index.html'),
+        studio: resolve(__dirname, 'studio.html'),
         colection_pria: resolve(__dirname, 'colection_pria.html'),
         colection_wanita: resolve(__dirname, 'colection_wanita.html'),
         colection_anak: resolve(__dirname, 'colection_anak.html'),
@@ -24,10 +24,6 @@ export default defineConfig({
         keranjang: resolve(__dirname, 'keranjang.html'),
         customer_profile: resolve(__dirname, 'customer profile.html'),
         search: resolve(__dirname, 'search fitur.html'),
-        // Skip problematic files for now
-        // airi: resolve(__dirname, 'airi.html'),
-        // cus: resolve(__dirname, 'cus.html'),
-        // low: resolve(__dirname, 'low.html'),
       },
     },
     outDir: 'dist',
