@@ -152,6 +152,189 @@ function ExportModal({ onClose, canvasRef }) {
   );
 }
 
+// ─── Modal AI Image Generator ─────────────────────────────────────────────────
+function AiGeneratorModal({ onClose, onAddImage }) {
+  // Google API Key dari env variable (jika ada)
+  const GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_API_KEY || '';
+  
+  const [prompt, setPrompt] = useState('');
+  const [selectedPreset, setSelectedPreset] = useState('Vector Logo');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const PRESETS = [
+    { label: 'Vector Logo', suffix: ', vector logo graphics, sharp lines, clean isolated illustration, white background' },
+    { label: 'Streetwear', suffix: ', streetwear graphic design style, edgy, bold typography elements, high contrast' },
+    { label: 'Cyberpunk', suffix: ', cyberpunk style, glowing neon lights, futuristic artwork, high detail' },
+    { label: 'Vintage', suffix: ', vintage retro badge logo style, distressed print texture, 80s aesthetic' },
+    { label: 'Anime / Manga', suffix: ', Japanese anime art style, vibrant colors, detailed character illustration' },
+    { label: 'Minimalist', suffix: ', minimalist line art, simple elegant aesthetic, single color graphic' },
+  ];
+
+  const handleGenerate = async () => {
+    if (!prompt.trim()) {
+      setError('Silakan ketikkan deskripsi/prompt gambar yang ingin dibuat.');
+      return;
+    }
+
+    setLoading(true);
+    setError('');
+
+    const presetObj = PRESETS.find(p => p.label === selectedPreset);
+    const fullPrompt = prompt.trim() + (presetObj ? presetObj.suffix : '');
+
+    try {
+      let imageUrl = null;
+
+      // 1. Coba panggil Google AI Studio API
+      try {
+        const response = await fetch(
+          `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=${encodeURIComponent(GOOGLE_API_KEY)}`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              instances: [{ prompt: fullPrompt }],
+              parameters: { sampleCount: 1, aspectRatio: '1:1', outputMimeType: 'image/png' }
+            })
+          }
+        );
+        const data = await response.json();
+        if (response.ok && data.predictions?.[0]?.bytesBase64Encoded) {
+          imageUrl = `data:image/png;base64,${data.predictions[0].bytesBase64Encoded}`;
+        }
+      } catch (e) {
+        console.warn('Google API request warning:', e);
+      }
+
+      // 2. High-speed Fallback AI Engine jika Google API restricted/CORS fail
+      if (!imageUrl) {
+        imageUrl = await new Promise((resolve) => {
+          const seed = Math.floor(Math.random() * 1000000);
+          const aiUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(fullPrompt)}?width=512&height=512&seed=${seed}&nologo=true`;
+          
+          const img = new Image();
+          img.crossOrigin = 'Anonymous';
+          img.onload = () => {
+            try {
+              const canvas = document.createElement('canvas');
+              canvas.width = img.naturalWidth || 512;
+              canvas.height = img.naturalHeight || 512;
+              const ctx = canvas.getContext('2d');
+              ctx.drawImage(img, 0, 0);
+              resolve(canvas.toDataURL('image/png'));
+            } catch (err) {
+              resolve(aiUrl);
+            }
+          };
+          img.onerror = () => resolve(aiUrl);
+          img.src = aiUrl;
+        });
+      }
+
+      if (!imageUrl) {
+        throw new Error('Gagal menghasilkan gambar. Silakan coba prompt lain.');
+      }
+
+      onAddImage(imageUrl);
+      onClose();
+    } catch (err) {
+      console.error('AI Generation Error:', err);
+      setError(err.message || 'Terjadi kesalahan saat memanggil AI.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 overflow-y-auto">
+      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden my-8 border border-gray-100">
+        
+        {/* Modal Header */}
+        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 bg-gradient-to-r from-[#0037b0] to-[#6025e0] text-white">
+          <div className="flex items-center gap-2">
+            <span className="text-xl">✨</span>
+            <h3 className="font-bold text-lg">Generate AI Design</h3>
+          </div>
+          <button onClick={onClose} className="text-white/70 hover:text-white text-2xl leading-none">&times;</button>
+        </div>
+
+        {/* Modal Body */}
+        <div className="p-6 space-y-5">
+
+          {/* Prompt Input */}
+          <div className="space-y-2">
+            <label className="text-xs font-bold uppercase text-[#151c27]">
+              🎨 Deskripsi Gambar (Prompt)
+            </label>
+            <textarea
+              value={prompt}
+              onChange={(e) => setPrompt(e.target.value)}
+              placeholder="Contoh: Seekor harimau cyber dengan kacamata neon, logo t-shirt streetwear..."
+              rows={3}
+              className="w-full border border-gray-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-[#0037b0] focus:outline-none resize-none"
+            />
+          </div>
+
+          {/* Preset Style */}
+          <div className="space-y-2">
+            <label className="text-xs font-bold uppercase text-gray-500 block">
+              Pilih Gaya / Style (Opsional):
+            </label>
+            <div className="flex flex-wrap gap-2">
+              {PRESETS.map((p) => (
+                <button
+                  key={p.label}
+                  type="button"
+                  onClick={() => setSelectedPreset(p.label)}
+                  className={`text-xs px-3 py-1.5 rounded-full border font-medium transition ${
+                    selectedPreset === p.label
+                      ? 'bg-[#0037b0] text-white border-[#0037b0] shadow-sm'
+                      : 'bg-gray-50 text-gray-700 border-gray-200 hover:bg-gray-100'
+                  }`}
+                >
+                  {p.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Error Message */}
+          {error && (
+            <div className="bg-red-50 text-red-600 border border-red-200 rounded-xl p-3 text-xs leading-relaxed">
+              ⚠️ {error}
+            </div>
+          )}
+
+          {/* Generate Button */}
+          <button
+            onClick={handleGenerate}
+            disabled={loading}
+            className="w-full bg-[#0037b0] text-white font-bold py-3.5 rounded-xl text-sm uppercase tracking-wider hover:brightness-110 transition shadow-lg disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer"
+          >
+            {loading ? (
+              <>
+                <span className="animate-spin">⏳</span>
+                <span>Memproses AI...</span>
+              </>
+            ) : (
+              <>
+                <span>✨</span>
+                <span>Generate Desain Kaos</span>
+              </>
+            )}
+          </button>
+
+          <p className="text-[10px] text-center text-gray-400">
+            Powered by Hypeware AI Generation Engine
+          </p>
+
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ─── Halaman Checkout ─────────────────────────────────────────────────────────
 function CheckoutPage({ onBack, designData, canvasRef }) {
   const { selectedColor, selectedSize, selectedTemplate, texts, images } = designData;
@@ -425,6 +608,7 @@ const HypewareStudio = () => {
   const [activeTool, setActiveTool] = useState('template'); // Default: template
   const [page, setPage] = useState('studio'); // 'studio' | 'checkout'
   const [showExport, setShowExport] = useState(false);
+  const [showAiModal, setShowAiModal] = useState(false);
 
   // State teks (array of text objects)
   const [texts, setTexts] = useState([]);
@@ -497,6 +681,21 @@ const HypewareStudio = () => {
   const updateImage = (id, patch) => setImages(prev => prev.map(img => img.id === id ? { ...img, ...patch } : img));
   const deleteImage = (id) => { setImages(prev => prev.filter(img => img.id !== id)); setSelectedImageId(null); };
 
+  const handleAddAiImage = (src) => {
+    const id = uid();
+    setImages(prev => [...prev, {
+      id,
+      src,
+      width: 200,
+      height: 200,
+      position: { x: 200, y: 200 },
+      rotation: 0,
+    }]);
+    setSelectedImageId(id);
+    setSelectedTextId(null);
+    setActiveTool('gambar');
+  };
+
   // ── Deselect on canvas click ──────────────────────────────────────────────
   const handleCanvasClick = () => {
     setSelectedTextId(null);
@@ -537,7 +736,14 @@ const HypewareStudio = () => {
             Hypeware <span className="font-normal opacity-50">Studio</span>
           </h1>
         </div>
-        <div className="flex gap-6 text-[11px] font-bold uppercase tracking-widest text-[#434655]">
+        <div className="flex items-center gap-4 text-[11px] font-bold uppercase tracking-widest text-[#434655]">
+          <button
+            onClick={() => setShowAiModal(true)}
+            className="flex items-center gap-1.5 bg-gradient-to-r from-[#0037b0] to-[#6025e0] text-white px-3.5 py-1.5 rounded-full text-xs font-bold hover:shadow-md hover:scale-105 transition cursor-pointer normal-case tracking-normal"
+          >
+            <span>✨</span>
+            <span>Generate with AI</span>
+          </button>
           <button onClick={goToHome} className="hover:text-[#0037b0] cursor-pointer bg-transparent border-0">Beranda</button>
           <span className="text-[#0037b0] border-b-2 border-[#0037b0]">Designer</span>
         </div>
@@ -547,6 +753,12 @@ const HypewareStudio = () => {
 
         {/* LEFT TOOLBAR */}
         <aside className="w-20 bg-white border-r border-[#c4c5d7] flex flex-col items-center py-8 gap-6 shrink-0">
+          <ToolButton
+            icon="✨"
+            label="AI Tool"
+            active={showAiModal}
+            onClick={() => setShowAiModal(true)}
+          />
           <ToolButton
             icon="📐"
             label="Template"
@@ -887,6 +1099,14 @@ const HypewareStudio = () => {
 
       {/* Export Modal */}
       {showExport && <ExportModal onClose={() => setShowExport(false)} canvasRef={canvasRef} />}
+
+      {/* AI Generator Modal */}
+      {showAiModal && (
+        <AiGeneratorModal
+          onClose={() => setShowAiModal(false)}
+          onAddImage={handleAddAiImage}
+        />
+      )}
     </div>
   );
 };
