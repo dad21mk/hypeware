@@ -81,237 +81,254 @@
     </nav>
 
     <main class="max-w-7xl mx-auto px-4 py-12">
-    <div class="flex flex-col md:flex-row justify-between items-end mb-10 gap-6 border-b border-gray-100 dark:border-gray-800 pb-6">
-      <div class="flex flex-wrap gap-6">
-        <button onclick="filterAction('all')" class="filter-btn active border-b-2 border-black font-bold text-xs uppercase tracking-widest pb-1">Semua</button>
-        <button onclick="filterAction('bjp')" class="filter-btn text-gray-400 font-bold text-xs uppercase tracking-widest pb-1 hover:text-black transition">Kaos</button>
-        <button onclick="filterAction('km')" class="filter-btn text-gray-400 font-bold text-xs uppercase tracking-widest pb-1 hover:text-black transition">Kemeja</button>
-        <button onclick="filterAction('cl')" class="filter-btn text-gray-400 font-bold text-xs uppercase tracking-widest pb-1 hover:text-black transition">celana</button>
-        <button onclick="filterAction('op')" class="filter-btn text-gray-400 font-bold text-xs uppercase tracking-widest pb-1 hover:text-black transition">Outerwear</button>
+      <div class="flex flex-col md:flex-row justify-between items-end mb-10 gap-6 border-b border-gray-100 dark:border-gray-800 pb-6">
+        <div class="flex flex-wrap gap-6">
+          <button onclick="filterAction('all')" class="filter-btn active border-b-2 border-black font-bold text-xs uppercase tracking-widest pb-1">Semua</button>
+          <button onclick="filterAction('bjp')" class="filter-btn text-gray-400 font-bold text-xs uppercase tracking-widest pb-1 hover:text-black transition">Kaos</button>
+          <button onclick="filterAction('km')" class="filter-btn text-gray-400 font-bold text-xs uppercase tracking-widest pb-1 hover:text-black transition">Kemeja</button>
+          <button onclick="filterAction('cl')" class="filter-btn text-gray-400 font-bold text-xs uppercase tracking-widest pb-1 hover:text-black transition">Celana</button>
+          <button onclick="filterAction('op')" class="filter-btn text-gray-400 font-bold text-xs uppercase tracking-widest pb-1 hover:text-black transition">Outerwear</button>
+        </div>
+
+        <select id="sortOption" onchange="runFilterAndSort()" class="bg-transparent border-none text-xs font-bold uppercase tracking-widest focus:ring-0 cursor-pointer">
+          <option value="newest">Urutkan: Terbaru</option>
+          <option value="low">Harga: Terendah</option>
+          <option value="high">Harga: Tertinggi</option>
+        </select>
       </div>
 
-      <select id="sortOption" onchange="runFilterAndSort()" class="bg-transparent border-none text-xs font-bold uppercase tracking-widest focus:ring-0 cursor-pointer">
-        <option value="newest">Urutkan: Terbaru</option>
-        <option value="low">Harga: Terendah</option>
-        <option value="high">Harga: Tertinggi</option>
-      </select>
-    </div>
+      <div id="product-container" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6"></div>
+      
+      <!-- Load More Button -->
+      <div id="load-more-container" class="mt-16 flex justify-center hidden">
+        <button id="load-more-btn" onclick="loadMoreAction()" class="border border-black px-10 py-4 text-[11px] font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-all duration-300">
+          Tampilkan Lebih Banyak
+        </button>
+      </div>
 
-    <div id="product-container" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6"></div>
-    <div id="load-more-container" class="mt-16 flex justify-center hidden">
-      <button id="load-more-btn" onclick="loadMoreAction()" class="border border-black px-10 py-4 text-[11px] font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-all duration-300">
-        Muat Lebih Banyak
-      </button>
-    </div>
-  </main>
+      <!-- No More Products Message -->
+      <div id="no-more-products" class="mt-8 text-center text-gray-500 hidden">
+        <p class="text-sm">Semua produk telah ditampilkan</p>
+      </div>
+    </main>
 
-  <script type="module" src="produk.js"></script>
-  <script src="colectiondata/colection_pria.js"></script>
-  <script src="footer.js"></script>
-  
-<script>
-// Collection page specific functionality
-let currentFilter = 'all';
-let currentSort = 'newest';
-let displayedProducts = [];
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
 
-document.addEventListener('DOMContentLoaded', function() {
-    renderCollectionPage();
-    setupFilterButtons();
-});
-
-function renderCollectionPage() {
-    if (window.hypewareProducts) {
-        const priaProducts = window.hypewareProducts.getProductsByGender('pria');
-        displayedProducts = priaProducts;
-        renderFilteredProducts();
-    }
-}
-
-function renderFilteredProducts() {
-    let filteredProducts = displayedProducts;
+    <!-- Scripts -->
+    <script type="module" src="produk.js"></script>
+    <script src="footer.js"></script>
     
-    // Apply filter
-    if (currentFilter !== 'all') {
-        filteredProducts = displayedProducts.filter(product => product.category === currentFilter);
-    }
-    
-    // Apply sort
-    filteredProducts = sortProducts(filteredProducts, currentSort);
-    
-    // Render products
-    const container = document.getElementById('product-container');
-    if (container && window.hypewareProducts) {
-        container.innerHTML = filteredProducts.map(product => `
-            <div class="group cursor-pointer animate-on-scroll" onclick="window.hypewareProducts.viewProduct('${product.id}')">
-                <div class="relative aspect-[3/4] mb-4 overflow-hidden bg-slate-100 dark:bg-slate-900">
-                    <img
-                        alt="${product.nama}"
-                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                        src="${product.img}"
-                        loading="lazy"
-                    />
-                    <button 
-                        class="absolute bottom-4 right-4 bg-white/90 dark:bg-black/90 p-2 opacity-0 group-hover:opacity-100 transition-opacity"
-                        onclick="event.stopPropagation(); window.hypewareProducts.addToCartQuick('${product.id}')"
-                    >
-                        <span class="material-icons-outlined text-xl">shopping_cart</span>
-                    </button>
-                </div>
-                <div>
-                    <p class="text-[11px] text-slate-500 mb-1 uppercase tracking-tighter">${product.gender} | ${getCategoryName(product.category)}</p>
-                    <h3 class="text-sm font-medium mb-2 group-hover:text-primary transition-colors">${product.nama}</h3>
-                    <p class="font-bold">${product.harga}</p>
-                </div>
+    <script>
+      // Collection page variables
+      let activeFilter = 'all';
+      let itemsLimit = 8; // Batas awal item yang tampil
+      let filteredData = []; // Menyimpan data yang sudah difilter
+      let allProducts = []; // Menyimpan semua produk
+
+      document.addEventListener('DOMContentLoaded', function() {
+        console.log('Collection page loaded');
+        // Tunggu sebentar untuk memastikan produk.js sudah load
+        setTimeout(() => {
+          initializeCollectionPage();
+        }, 100);
+      });
+
+      function initializeCollectionPage() {
+        console.log('Initializing collection page...');
+        
+        if (!window.hypewareProducts || !window.hypewareProducts.getProductsByGender) {
+          console.log('Product system not ready, retrying...');
+          setTimeout(initializeCollectionPage, 100);
+          return;
+        }
+
+        // Ambil data produk pria
+        allProducts = window.hypewareProducts.getProductsByGender('pria');
+        console.log('Loaded products:', allProducts);
+        
+        // Cek URL parameter untuk kategori
+        const urlParams = new URLSearchParams(window.location.search);
+        const categoryParam = urlParams.get('cat');
+        
+        if (categoryParam) {
+          console.log('URL category parameter:', categoryParam);
+          activeFilter = categoryParam;
+          
+          // Update button states berdasarkan URL parameter
+          document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.classList.remove('active', 'border-b-2', 'border-black', 'text-black');
+            btn.classList.add('text-gray-400');
+          });
+          
+          // Cari dan aktifkan button yang sesuai
+          const targetButton = document.querySelector(`[onclick="filterAction('${categoryParam}')"]`);
+          if (targetButton) {
+            targetButton.classList.add('active', 'border-b-2', 'border-black', 'text-black');
+            targetButton.classList.remove('text-gray-400');
+          }
+        }
+        
+        // Jalankan filter dan sort pertama kali
+        runFilterAndSort();
+        
+        // Update cart badge
+        if (window.hypewareProducts.cart) {
+          window.hypewareProducts.cart.updateCartUI();
+        }
+      }
+
+      function renderItems(list) {
+        const container = document.getElementById('product-container');
+        const loadMoreContainer = document.getElementById('load-more-container');
+        const noMoreProducts = document.getElementById('no-more-products');
+        
+        console.log('Rendering items:', list.length, 'items, limit:', itemsLimit);
+        
+        if (!list || list.length === 0) {
+          container.innerHTML = `<p class="col-span-full text-center py-20 text-gray-400 uppercase tracking-widest">Produk tidak tersedia.</p>`;
+          loadMoreContainer.classList.add('hidden');
+          noMoreProducts.classList.add('hidden');
+          return;
+        }
+
+        // POTONG DATA: Hanya ambil data dari indeks 0 sampai itemsLimit
+        const visibleItems = list.slice(0, itemsLimit);
+        console.log('Visible items:', visibleItems.length);
+
+        container.innerHTML = visibleItems.map(item => `
+          <div class="group animate-on-scroll cursor-pointer" onclick="viewProduct('${item.id}')">
+            <div class="relative aspect-[3/4] overflow-hidden bg-gray-100 mb-4">
+              <img src="${item.img}" alt="${item.nama}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+              <button onclick="event.stopPropagation(); addToCartQuick('${item.id}')" 
+                      class="absolute bottom-4 right-4 bg-white/90 dark:bg-black/90 p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                <span class="material-icons-outlined text-xl">shopping_cart</span>
+              </button>
             </div>
+            <div>
+              <p class="text-[11px] text-slate-500 mb-1 uppercase tracking-tighter">${item.gender} | ${getCategoryName(item.category)}</p>
+              <h3 class="text-sm font-medium mb-2 group-hover:text-primary transition-colors">${item.nama}</h3>
+              <p class="font-bold">${item.harga}</p>
+            </div>
+          </div>
         `).join('');
-    }
-}
 
-function setupFilterButtons() {
-    // Update existing filter functions to work with new system
-    window.filterAction = function(category) {
-        currentFilter = category;
+        // LOGIKA TOMBOL: Tampilkan tombol hanya jika total barang > barang yang tampil
+        if (list.length > itemsLimit) {
+          loadMoreContainer.classList.remove('hidden');
+          noMoreProducts.classList.add('hidden');
+        } else {
+          loadMoreContainer.classList.add('hidden');
+          if (list.length > 8) { // Hanya tampilkan pesan jika ada lebih dari 8 produk
+            noMoreProducts.classList.remove('hidden');
+          } else {
+            noMoreProducts.classList.add('hidden');
+          }
+        }
+
+        // Animate new items
+        setTimeout(() => {
+          setupScrollAnimation();
+        }, 100);
+      }
+
+      function loadMoreAction() {
+        console.log('Load more clicked, current limit:', itemsLimit);
+        itemsLimit += 8; // Tambah 8 item lagi setiap diklik
+        renderItems(filteredData);
+      }
+
+      function filterAction(cat) {
+        console.log('Filter action:', cat);
+        activeFilter = cat;
+        itemsLimit = 8; // Reset limit setiap ganti kategori
         
         // Update button states
         document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.classList.remove('active', 'border-black', 'text-black');
-            btn.classList.add('text-gray-400');
+          btn.classList.remove('active', 'border-b-2', 'border-black', 'text-black');
+          btn.classList.add('text-gray-400');
         });
-        
-        event.target.classList.add('active', 'border-black', 'text-black');
+        event.target.classList.add('active', 'border-b-2', 'border-black', 'text-black');
         event.target.classList.remove('text-gray-400');
+
+        runFilterAndSort();
+      }
+
+      function runFilterAndSort() {
+        console.log('Running filter and sort, activeFilter:', activeFilter);
         
-        renderFilteredProducts();
-    };
-    
-    window.runFilterAndSort = function() {
-        const sortSelect = document.getElementById('sortOption');
-        currentSort = sortSelect.value;
-        renderFilteredProducts();
-    };
-}
+        if (!allProducts || allProducts.length === 0) {
+          console.log('No products available');
+          return;
+        }
 
-function sortProducts(products, sortType) {
-    const sorted = [...products];
-    
-    switch(sortType) {
-        case 'low':
-            return sorted.sort((a, b) => a.priceNumeric - b.priceNumeric);
-        case 'high':
-            return sorted.sort((a, b) => b.priceNumeric - a.priceNumeric);
-        case 'newest':
-        default:
-            return sorted; // Keep original order for newest
-    }
-}
+        // 1. Ambil data asli dan filter
+        filteredData = activeFilter === 'all' 
+          ? [...allProducts] 
+          : allProducts.filter(p => p.category === activeFilter);
 
-function getCategoryName(category) {
-    const categoryNames = {
-        'bjp': 'Kaos',
-        'km': 'Kemeja',
-        'op': 'Outerwear',
-        'cl': 'Celana'
-    };
-    return categoryNames[category] || category;
-}
-</script>
-  let activeFilter = 'all';
-  let itemsLimit = 8; // Batas awal item yang tampil
-  let filteredData = []; // Menyimpan data yang sudah difilter
+        console.log('Filtered data:', filteredData.length, 'items');
 
-  function renderItems(list) {
-    const container = document.getElementById('product-container');
-    const loadMoreContainer = document.getElementById('load-more-container');
-    
-    if (!list || list.length === 0) {
-      container.innerHTML = `<p class="col-span-full text-center py-20 text-gray-400 uppercase tracking-widest">Produk tidak tersedia.</p>`;
-      loadMoreContainer.classList.add('hidden');
-      return;
-    }
+        // 2. Sort berdasarkan harga
+        const sortType = document.getElementById('sortOption').value;
+        if (sortType === 'low') {
+          filteredData.sort((a, b) => a.priceNumeric - b.priceNumeric);
+        } else if (sortType === 'high') {
+          filteredData.sort((a, b) => b.priceNumeric - a.priceNumeric);
+        }
 
-    // POTONG DATA: Hanya ambil data dari indeks 0 sampai itemsLimit
-    const visibleItems = list.slice(0, itemsLimit);
+        // 3. Render
+        renderItems(filteredData);
+      }
 
-    container.innerHTML = visibleItems.map(item => `
-      <div class="group animate-on-scroll">
-        <div class="relative aspect-[3/4] overflow-hidden bg-gray-100 mb-4">
-          <img src="${item.img}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-          <button onclick="window.location.href='desc.item.html?id=${item.id}'" 
-                  class="absolute bottom-0 left-0 right-0 bg-black text-white py-4 text-[10px] font-bold opacity-0 group-hover:opacity-100 transition-all uppercase">
-            Detail Produk
-          </button>
-        </div>
-        <h3 class="text-[11px] font-bold uppercase tracking-tight">${item.nama}</h3>
-        <p class="text-[11px] text-gray-500 mt-1">${item.harga}</p>
-      </div>
-    `).join('');
+      function viewProduct(productId) {
+        console.log('Viewing product:', productId);
+        if (window.hypewareProducts && window.hypewareProducts.viewProduct) {
+          window.hypewareProducts.viewProduct(productId);
+        } else {
+          // Fallback
+          localStorage.setItem('selectedProductId', productId);
+          window.location.href = 'desc.item.html';
+        }
+      }
 
-    // LOGIKA TOMBOL: Tampilkan tombol hanya jika total barang > barang yang tampil
-    if (list.length > itemsLimit) {
-      loadMoreContainer.classList.remove('hidden');
-    } else {
-      loadMoreContainer.classList.add('hidden');
-    }
-  }
+      function addToCartQuick(productId) {
+        console.log('Adding to cart:', productId);
+        if (window.hypewareProducts && window.hypewareProducts.addToCartQuick) {
+          window.hypewareProducts.addToCartQuick(productId);
+        } else {
+          alert('Sistem keranjang belum siap, coba lagi sebentar.');
+        }
+      }
 
-  function loadMoreAction() {
-    itemsLimit += 8; // Tambah 8 item lagi setiap diklik
-    runFilterAndSort();
-  }
+      function getCategoryName(category) {
+        const categoryNames = {
+          'bjp': 'Kaos',
+          'km': 'Kemeja',
+          'op': 'Outerwear',
+          'cl': 'Celana'
+        };
+        return categoryNames[category] || category;
+      }
 
-  function filterAction(cat) {
-    activeFilter = cat;
-    itemsLimit = 8; // Reset limit setiap ganti kategori
-    
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.classList.remove('border-b-2', 'border-black', 'text-black');
-      btn.classList.add('text-gray-400');
-    });
-    event.target.classList.add('border-b-2', 'border-black', 'text-black');
-    event.target.classList.remove('text-gray-400');
+      function setupScrollAnimation() {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('opacity-100', 'translate-y-0');
+              entry.target.classList.remove('opacity-0', 'translate-y-8');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
 
-    runFilterAndSort();
-  }
-
-  function runFilterAndSort() {
-    // 1. Ambil data asli dan filter
-    filteredData = activeFilter === 'all' 
-      ? [...dataPria] 
-      : dataPria.filter(p => p.category === activeFilter);
-
-    // 2. Sort berdasarkan harga
-    const sortType = document.getElementById('sortOption').value;
-    if (sortType === 'low') {
-      filteredData.sort((a, b) => a.priceNumeric - b.priceNumeric);
-    } else if (sortType === 'high') {
-      filteredData.sort((a, b) => b.priceNumeric - a.priceNumeric);
-    }
-
-    // 3. Render
-    renderItems(filteredData);
-  }
-
-  window.onload = () => runFilterAndSort();
-</script>
-    <div id="footer-placeholder"></div>
-
-    <script src="footer.js"></script>
-    <script>
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('opacity-100', 'translate-y-0');
-            entry.target.classList.remove('opacity-0', 'translate-y-8');
-            observer.unobserve(entry.target);
+        document.querySelectorAll('.animate-on-scroll').forEach((el) => {
+          if (!el.classList.contains('opacity-100')) {
+            el.classList.add('opacity-0', 'translate-y-8', 'transition-all', 'duration-700', 'ease-out');
+            observer.observe(el);
           }
         });
-      }, { threshold: 0.1 });
-
-      document.querySelectorAll('.animate-on-scroll').forEach((el) => {
-        el.classList.add('opacity-0', 'translate-y-8', 'transition-all', 'duration-700', 'ease-out');
-        observer.observe(el);
-      });
+      }
     </script>
   </body>
 </html>
