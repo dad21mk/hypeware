@@ -133,20 +133,38 @@
       const categoryData = {
         pria: {
           featured: ["Rilisan Terbaru", "Best Sellers", "Sepatu Lari"],
-          types: ["kaos", "Jas & jaket", "celana", "Outerwear"],
+          types: [
+            { name: "kaos", category: "bjp", link: "colection_pria.html?cat=bjp" },
+            { name: "kemeja", category: "km", link: "colection_pria.html?cat=km" },
+            { name: "celana", category: "cl", link: "colection_pria.html?cat=cl" },
+            { name: "outerwear", category: "op", link: "colection_pria.html?cat=op" }
+          ],
           promo: "KOLEKSI PRIA MODERN",
+          promoLink: "colection_pria.html",
           img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=2071"
         },
         wanita: {
           featured: ["Dress Malam", "New Arrivals", "Aksesoris"],
-          types: ["baju", "dress", "celana & rok", "outerwear"],
+          types: [
+            { name: "baju", category: "bj", link: "colection_wanita.html?cat=bj" },
+            { name: "dress", category: "dr", link: "colection_wanita.html?cat=dr" },
+            { name: "celana & rok", category: "cl", link: "colection_wanita.html?cat=cl" },
+            { name: "outerwear", category: "op", link: "colection_wanita.html?cat=op" }
+          ],
           promo: "ELEGANSI WANITA",
+          promoLink: "colection_wanita.html",
           img: "https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070"
         },
         anak: {
           featured: ["Pakaian Bayi", "Sepatu Sekolah"],
-          types: ["Setelan Bermain", "Topi Lucu", "Jaket Mini", "Mainan"],
+          types: [
+            { name: "setelan bermain", category: "st", link: "colection_anak.html?cat=st" },
+            { name: "topi lucu", category: "tp", link: "colection_anak.html?cat=tp" },
+            { name: "jaket mini", category: "jk", link: "colection_anak.html?cat=jk" },
+            { name: "mainan", category: "my", link: "colection_anak.html?cat=my" }
+          ],
           promo: "DUNIA ANAK-ANAK",
+          promoLink: "colection_anak.html",
           img: "https://images.unsplash.com/photo-1514090458221-65bb69cf63e6?q=80&w=2070"
         }
       };
@@ -170,7 +188,7 @@
           <div>
             <h4 class="font-display text-lg mb-6 uppercase font-bold">Kategori Produk</h4>
             <ul class="space-y-3 text-gray-600 dark:text-gray-300">
-               ${data.types.map(item => `<li><a href="#" class="hover:text-black dark:hover:text-white transition">${item}</a></li>`).join('')}
+               ${data.types.map(item => `<li><a href="${item.link}" class="hover:text-black dark:hover:text-white transition capitalize">${item.name}</a></li>`).join('')}
             </ul>
           </div>
           <div>
@@ -184,7 +202,7 @@
             <div class="z-10 text-white">
               <p class="text-xs uppercase tracking-widest mb-2">Terbaru</p>
               <h3 class="text-2xl font-display font-bold mb-4">${data.promo}</h3>
-              <a href="#" class="inline-block bg-white text-black px-6 py-2 text-sm uppercase font-bold hover:bg-primary hover:text-white transition">Lihat Semua</a>
+              <a href="${data.promoLink}" class="inline-block bg-white text-black px-6 py-2 text-sm uppercase font-bold hover:bg-primary hover:text-white transition">Lihat Semua</a>
             </div>
             <div class="absolute inset-0 bg-black/40 z-0"></div>
             <div class="absolute inset-0 z-[-1] bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style="background-image: url('${data.img}')"></div>
@@ -391,13 +409,13 @@
               Kostume <span class="text-primary font-display uppercase">pakaian mu</span>
             </h2>
             <p class="text-lg text-slate-600 dark:text-slate-400 mb-8 leading-relaxed">
-              Teknologi kain yang memberikan kenyamanan luar biasa. Cepat kering, sejuk saat disentuh, dan sangat lembut di kulit. Cocok untuk cuaca tropis Indonesia.
+              sesuaikan desaind bajumu dengan seleramu, dengan berbagai pilihan warna dan fitur yang dapat disesuaikan untuk kenyamanan maksimal.
             </p>
             <div class="grid grid-cols-2 gap-4 mb-10">
               <div class="bg-white dark:bg-black p-6 border border-slate-100 dark:border-slate-800">
                 <span class="material-icons-outlined text-primary mb-3">ac_unit</span>
-                <h4 class="font-bold text-sm uppercase mb-2">Sejuk &amp; Segar</h4>
-                <p class="text-xs text-slate-500">Menjaga tubuh tetap dingin bahkan di hari terpanas.</p>
+                <h4 class="font-bold text-sm uppercase mb-2">Upload &amp; desaind</h4>
+                <p class="text-xs text-slate-500">hitam kan dan gegarkan dunia dengan desain mu</p>
               </div>
               <div class="bg-white dark:bg-black p-6 border border-slate-100 dark:border-slate-800">
                 <span class="material-icons-outlined text-primary mb-3">speed</span>
@@ -431,7 +449,7 @@
     <section class="max-w-[1440px] mx-auto px-4 md:px-8 py-24">
       <h2 class="text-center text-3xl font-bold mb-16 uppercase tracking-[0.3em] font-display">Koleksi Pilihan</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <a class="group relative aspect-[4/5] overflow-hidden" href="#">
+        <a class="group relative aspect-[4/5] overflow-hidden" href="colection_wanita.html">
           <img
             alt="Wanita"
             class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
@@ -443,7 +461,7 @@
             <p class="text-white/80 text-sm mt-2 font-medium">Lihat Koleksi →</p>
           </div>
         </a>
-        <a class="group relative aspect-[4/5] overflow-hidden" href="#">
+        <a class="group relative aspect-[4/5] overflow-hidden" href="colection_pria.html">
           <img
             alt="Pria"
             class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
@@ -455,7 +473,7 @@
             <p class="text-white/80 text-sm mt-2 font-medium">Lihat Koleksi →</p>
           </div>
         </a>
-        <a class="group relative aspect-[4/5] overflow-hidden" href="#">
+        <a class="group relative aspect-[4/5] overflow-hidden" href="colection_anak.html">
           <img
             alt="Anak"
             class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
