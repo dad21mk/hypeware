@@ -221,7 +221,7 @@ class OrderSystem {
       return;
     }
 
-    const waNumber = '6281234567890'; // Ganti dengan nomor WA toko
+    const waNumber = '6281393615568'; // Ganti dengan nomor WA toko
     const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(orderDetails.message)}`;
     
     // Buka WhatsApp
@@ -245,7 +245,7 @@ class OrderSystem {
 
     const fullMessage = customerInfo + orderDetails.message;
     
-    const waNumber = '6281234567890'; // Ganti dengan nomor WA toko
+    const waNumber = '6281393615568'; // Ganti dengan nomor WA toko
     const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(fullMessage)}`;
     
     // Buka WhatsApp
