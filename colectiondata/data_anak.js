@@ -1,5 +1,5 @@
-// Data Produk Anak - non-module global script
-window.dataAnak = [
+// Data Produk Anak — sumber tunggal untuk global script & ES module
+const _dataAnak = [
   { id: "kaos-anak-grafis", nama: "Kaos Grafis Katun Lembut Anak", category: "bjp",
     deskripsi: "Kaos anak berbahan katun 100% yang sangat lembut, menyerap keringat, dan tahan lama untuk petualangan si kecil.",
     harga: "Rp149.000", priceNumeric: 149000,
@@ -19,5 +19,11 @@ window.dataAnak = [
   { id: "celana-jogger-anak", nama: "Celana Jogger Katun Casual Anak", category: "cl",
     deskripsi: "Celana jogger katun bermaterial stretch dengan karet pinggang fleksibel, pas untuk gerakan bebas si kecil.",
     harga: "Rp179.000", priceNumeric: 179000,
-    img: "https://riraclothing.com/wp-content/uploads/2024/06/celana-wanita-santai.webp" }
+    img: "https://riraclothing.com/wp-content/uploads/2024/06/celana-wanita-santai.webp" },
 ];
+
+// Expose ke global (untuk <script src="..."> biasa di HTML)
+if (typeof window !== 'undefined') window.dataAnak = _dataAnak;
+
+// Export ES module (untuk produk.js yang pakai import)
+export const dataAnak = _dataAnak;

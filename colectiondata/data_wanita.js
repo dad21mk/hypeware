@@ -1,5 +1,5 @@
-// Data Produk Wanita - non-module global script
-window.dataWanita = [
+// Data Produk Wanita — sumber tunggal untuk global script & ES module
+const _dataWanita = [
   // baju / top
   { id: "kaos-crew", nama: "T-Shirt Crew Neck", category: "bj",
     deskripsi: "T-shirt dengan potongan crew neck yang klasik dan nyaman. Terbuat dari bahan katun berkualitas tinggi yang lembut di kulit.",
@@ -48,5 +48,11 @@ window.dataWanita = [
   { id: "jaket_parka", nama: "Jaket Parka Ringan Wanita", category: "op",
     deskripsi: "Jaket parka ringan yang cocok untuk cuaca dingin. Desain minimalis dengan fungsi maksimal.",
     harga: "Rp599.000", priceNumeric: 599000,
-    img: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=1000" }
+    img: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=1000" },
 ];
+
+// Expose ke global (untuk <script src="..."> biasa di HTML)
+if (typeof window !== 'undefined') window.dataWanita = _dataWanita;
+
+// Export ES module (untuk produk.js yang pakai import)
+export const dataWanita = _dataWanita;

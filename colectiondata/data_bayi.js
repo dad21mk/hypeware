@@ -1,5 +1,5 @@
-// Data Produk Bayi - non-module global script
-window.dataBayi = [
+// Data Produk Bayi — sumber tunggal untuk global script & ES module
+const _dataBayi = [
   { id: "bodysuit-bayi-katun", nama: "Bodysuit Katun Organik Newborn", category: "bjp",
     deskripsi: "Bodysuit bayi dari 100% katun organik yang ekstra lembut dan bebas bahan kimia berbahaya untuk kulit sensitif bayi.",
     harga: "Rp129.000", priceNumeric: 129000,
@@ -17,3 +17,9 @@ window.dataBayi = [
     harga: "Rp99.000", priceNumeric: 99000,
     img: "https://riraclothing.com/wp-content/uploads/2024/06/celana-wanita-santai.webp" }
 ];
+
+// Expose ke global (untuk <script src="..."> biasa di HTML)
+if (typeof window !== 'undefined') window.dataBayi = _dataBayi;
+
+// Export ES module (untuk produk.js yang pakai import)
+export const dataBayi = _dataBayi;
