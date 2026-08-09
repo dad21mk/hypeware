@@ -55,4 +55,4 @@ const _dataWanita = [
 if (typeof window !== 'undefined') window.dataWanita = _dataWanita;
 
 // Export ES module (untuk produk.js yang pakai import)
-export const dataWanita = _dataWanita;
+if (typeof module !== 'undefined' && module.exports) { module.exports = { dataWanita: _dataWanita }; }

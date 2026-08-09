@@ -22,4 +22,4 @@ const _dataBayi = [
 if (typeof window !== 'undefined') window.dataBayi = _dataBayi;
 
 // Export ES module (untuk produk.js yang pakai import)
-export const dataBayi = _dataBayi;
+if (typeof module !== 'undefined' && module.exports) { module.exports = { dataBayi: _dataBayi }; }

@@ -26,4 +26,4 @@ const _dataAnak = [
 if (typeof window !== 'undefined') window.dataAnak = _dataAnak;
 
 // Export ES module (untuk produk.js yang pakai import)
-export const dataAnak = _dataAnak;
+if (typeof module !== 'undefined' && module.exports) { module.exports = { dataAnak: _dataAnak }; }

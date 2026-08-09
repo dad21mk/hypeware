@@ -1,8 +1,5 @@
 // ===== IMPORT DATA DARI SEMUA KOLEKSI =====
-import { dataPria } from './colectiondata/data_pria.js';
-import { dataWanita } from './colectiondata/data_wanita.js';
-import { dataAnak } from './colectiondata/data_anak.js';
-import { dataBayi } from './colectiondata/data_bayi.js';
+import { dataPria, dataWanita, dataAnak, dataBayi } from './colectiondata/all-products.js';
 
 // ===== GABUNGKAN SEMUA DATA PRODUK =====
 const allProducts = [

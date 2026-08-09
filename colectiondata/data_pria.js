@@ -78,4 +78,4 @@ const _dataPria = [
 if (typeof window !== 'undefined') window.dataPria = _dataPria;
 
 // Export ES module (untuk produk.js yang pakai import)
-export const dataPria = _dataPria;
+if (typeof module !== 'undefined' && module.exports) { module.exports = { dataPria: _dataPria }; }
