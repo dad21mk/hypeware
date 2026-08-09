@@ -1,13 +1,15 @@
 // ===== IMPORT DATA DARI SEMUA KOLEKSI =====
-// Import data pria
 import { dataPria } from './colectiondata/colection_pria.js';
-// Import data wanita  
 import { dataWanita } from './colectiondata/colection_wanita.js';
+import { dataAnak } from './colectiondata/colection_anak.js';
+import { dataBayi } from './colectiondata/colection_bayi.js';
 
 // ===== GABUNGKAN SEMUA DATA PRODUK =====
 const allProducts = [
   ...dataPria.map(item => ({ ...item, gender: 'pria' })),
   ...dataWanita.map(item => ({ ...item, gender: 'wanita' })),
+  ...dataAnak.map(item => ({ ...item, gender: 'anak' })),
+  ...dataBayi.map(item => ({ ...item, gender: 'bayi' })),
 ];
 
 // ===== FUNGSI UTILITAS =====

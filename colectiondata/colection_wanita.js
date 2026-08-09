@@ -8,7 +8,7 @@ export const dataWanita = [
     deskripsi: "T-shirt dengan potongan crew neck yang klasik dan nyaman. Terbuat dari bahan katun berkualitas tinggi yang lembut di kulit.",
     harga: "Rp199.000", 
     priceNumeric: 199000, 
-    img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=1000" 
+    img: "https://riraclothing.com/wp-content/uploads/2024/11/Blouse.webp"
   },
   { 
     id: "celana-linen", 
@@ -17,7 +17,7 @@ export const dataWanita = [
     deskripsi: "Celana dengan bahan linen blend yang breathable dan nyaman. Cocok untuk cuaca tropis dengan potongan yang flowy dan elegan.",
     harga: "Rp499.000", 
     priceNumeric: 499000, 
-    img: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?q=80&w=1000" 
+    img: "https://riraclothing.com/wp-content/uploads/2024/06/celana-wanita-santai.webp" 
   },
 
   // dress
@@ -29,6 +29,24 @@ export const dataWanita = [
     harga: "Rp4.331.859", 
     priceNumeric: 4331859, 
     img: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcT9sEwB7Iw8XrEs8K87JqYy0phnvQNCLq9o87TmYOYqA7HwiAPuxjTxM0lWxim5JOD7yUpUmJcp5tikceRB9tFgkEb-6u2lxTP8B57xigSLfGMOepvUVbBw" 
+  },
+  {
+    id: "rok-span", 
+    nama: "Rok Span Midi Hitam", 
+    category: "cl", 
+    deskripsi: "Rok pensil midi dengan belahan belakang untuk memudahkan gerakan. Bahan scuba yang tebal memberikan tampilan yang rapi dan profesional.",
+    harga: "Rp180.000", 
+    priceNumeric: 180000, 
+    img: "https://6a783b1f51198decb75276c1.imgix.net/sandbox/Yeni%20%C3%9Cr%C3%BCnler.jpg?auto=compress"
+  },
+  {
+    id: "rok-span", 
+    nama: "Rok Span Midi Hitam", 
+    category: "cl", 
+    deskripsi: "Rok pensil midi dengan belahan belakang untuk memudahkan gerakan. Bahan scuba yang tebal memberikan tampilan yang rapi dan profesional.",
+    harga: "Rp180.000", 
+    priceNumeric: 180000, 
+    img: "https://6a783b1f51198decb75276c1.imgix.net/sandbox/Matches.jpg"
   },
   { 
     id: "Overall_Dress", 

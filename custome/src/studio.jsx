@@ -618,6 +618,33 @@ const HypewareStudio = () => {
   const [images, setImages] = useState([]);
   const [selectedImageId, setSelectedImageId] = useState(null);
 
+  // Responsive Canvas Scaling untuk layar HP Android / Mobile
+  const [canvasScale, setCanvasScale] = useState(1);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const screenWidth = window.innerWidth;
+      if (screenWidth < 640) {
+        const availableWidth = screenWidth - 32;
+        const scale = Math.min(1, Math.max(0.48, availableWidth / 600));
+        setCanvasScale(scale);
+      } else if (screenWidth < 768) {
+        const availableWidth = screenWidth - 64;
+        const scale = Math.min(1, Math.max(0.6, availableWidth / 600));
+        setCanvasScale(scale);
+      } else if (screenWidth < 1024) {
+        const availableWidth = screenWidth - 360;
+        const scale = Math.min(1, Math.max(0.65, availableWidth / 600));
+        setCanvasScale(scale);
+      } else {
+        setCanvasScale(1);
+      }
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const designAreaRef = useRef(null);
   const canvasRef = useRef(null);
   const fileInputRef = useRef(null);
@@ -726,33 +753,33 @@ const HypewareStudio = () => {
   }
 
   return (
-    <div className="flex flex-col h-screen bg-[#f9f9ff] text-[#151c27] font-['Inter'] overflow-hidden">
+    <div className="flex flex-col h-screen md:h-screen bg-[#f9f9ff] text-[#151c27] font-['Inter'] overflow-y-auto md:overflow-hidden">
 
       {/* HEADER */}
-      <header className="h-16 bg-white border-b border-[#c4c5d7] flex items-center justify-between px-8 z-20 shrink-0">
-        <div onClick={goToHome} className="flex items-center gap-4 hover:opacity-80 transition cursor-pointer">
-          <div className="w-8 h-8 bg-[#0037b0] rounded-[4px] flex items-center justify-center text-white text-sm font-bold">H</div>
-          <h1 className="font-bold text-lg tracking-tight uppercase">
+      <header className="min-h-16 bg-white border-b border-[#c4c5d7] flex flex-wrap items-center justify-between px-4 sm:px-8 py-2 md:py-0 z-20 shrink-0 gap-2">
+        <div onClick={goToHome} className="flex items-center gap-3 md:gap-4 hover:opacity-80 transition cursor-pointer">
+          <div className="w-7 h-7 md:w-8 md:h-8 bg-[#0037b0] rounded-[4px] flex items-center justify-center text-white text-xs md:text-sm font-bold">H</div>
+          <h1 className="font-bold text-base md:text-lg tracking-tight uppercase">
             Hypeware <span className="font-normal opacity-50">Studio</span>
           </h1>
         </div>
-        <div className="flex items-center gap-4 text-[11px] font-bold uppercase tracking-widest text-[#434655]">
+        <div className="flex items-center gap-2 sm:gap-4 text-[11px] font-bold uppercase tracking-widest text-[#434655]">
           <button
             onClick={() => setShowAiModal(true)}
-            className="flex items-center gap-1.5 bg-gradient-to-r from-[#0037b0] to-[#6025e0] text-white px-3.5 py-1.5 rounded-full text-xs font-bold hover:shadow-md hover:scale-105 transition cursor-pointer normal-case tracking-normal"
+            className="flex items-center gap-1.5 bg-gradient-to-r from-[#0037b0] to-[#6025e0] text-white px-2.5 sm:px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-bold hover:shadow-md hover:scale-105 transition cursor-pointer normal-case tracking-normal"
           >
             <span>✨</span>
             <span>Generate with AI</span>
           </button>
-          <button onClick={goToHome} className="hover:text-[#0037b0] cursor-pointer bg-transparent border-0">Beranda</button>
-          <span className="text-[#0037b0] border-b-2 border-[#0037b0]">Designer</span>
+          <button onClick={goToHome} className="hover:text-[#0037b0] cursor-pointer bg-transparent border-0 text-xs sm:text-sm">Beranda</button>
+          <span className="text-[#0037b0] border-b-2 border-[#0037b0] text-xs sm:text-sm">Designer</span>
         </div>
       </header>
 
-      <main className="flex flex-1 overflow-hidden">
+      <main className="flex flex-col md:flex-row flex-1 overflow-y-auto md:overflow-hidden">
 
         {/* LEFT TOOLBAR */}
-        <aside className="w-20 bg-white border-r border-[#c4c5d7] flex flex-col items-center py-8 gap-6 shrink-0">
+        <aside className="w-full md:w-20 bg-white border-b md:border-b-0 md:border-r border-[#c4c5d7] flex flex-row md:flex-col items-center justify-around py-2 md:py-8 gap-1 md:gap-6 shrink-0 z-10">
           <ToolButton
             icon="✨"
             label="AI Tool"
@@ -781,23 +808,23 @@ const HypewareStudio = () => {
         </aside>
 
         {/* CENTER CANVAS */}
-        <section className="flex-1 bg-[#e7eefe] relative flex items-center justify-center p-8 overflow-hidden">
+        <section className="flex-1 bg-[#e7eefe] relative flex flex-col items-center justify-center p-3 sm:p-6 md:p-8 overflow-hidden min-h-[380px] sm:min-h-[480px]">
           
           {/* Jika tool = template, tampilkan grid template */}
           {activeTool === 'template' && !selectedTemplate && (
             <div className="w-full max-w-3xl">
-              <h2 className="text-2xl font-bold mb-6 text-center">Pilih Template Kaos</h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-center">Pilih Template Kaos</h2>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
                 {TEMPLATES.map(tpl => (
                   <button
                     key={tpl.id}
                     onClick={() => handleSelectTemplate(tpl)}
-                    className="bg-white rounded-xl p-4 shadow hover:shadow-xl transition border-2 border-transparent hover:border-[#0037b0] group"
+                    className="bg-white rounded-xl p-3 md:p-4 shadow hover:shadow-xl transition border-2 border-transparent hover:border-[#0037b0] group"
                   >
-                    <div className="relative w-full aspect-square mb-3 flex items-center justify-center bg-gray-50 rounded-lg overflow-hidden">
+                    <div className="relative w-full aspect-square mb-2 md:mb-3 flex items-center justify-center bg-gray-50 rounded-lg overflow-hidden">
                       <img src={tpl.image} alt={tpl.name} className="w-full h-full object-contain" />
                     </div>
-                    <h3 className="font-bold text-sm text-center group-hover:text-[#0037b0]">{tpl.name}</h3>
+                    <h3 className="font-bold text-xs md:text-sm text-center group-hover:text-[#0037b0]">{tpl.name}</h3>
                   </button>
                 ))}
               </div>
@@ -807,10 +834,21 @@ const HypewareStudio = () => {
           {/* Jika sudah pilih template atau tool lain, tampilkan canvas */}
           {(selectedTemplate || activeTool !== 'template') && (
             <div
-              ref={canvasRef}
-              className="relative bg-transparent"
-              style={{ width: 600, height: 600 }}
+              className="relative flex items-center justify-center transition-all duration-300 my-auto"
+              style={{
+                width: 600 * canvasScale,
+                height: 600 * canvasScale,
+              }}
             >
+              <div
+                ref={canvasRef}
+                className="relative bg-transparent origin-top-left transition-transform duration-300"
+                style={{
+                  width: 600,
+                  height: 600,
+                  transform: `scale(${canvasScale})`,
+                }}
+              >
               {/* Mockup baju */}
               <img
                 src={selectedTemplate?.image || tempelate}
@@ -893,11 +931,12 @@ const HypewareStudio = () => {
                 )}
               </div>
             </div>
+            </div>
           )}
         </section>
 
         {/* RIGHT PANEL */}
-        <aside className="w-80 bg-white border-l border-[#c4c5d7] flex flex-col shrink-0">
+        <aside className="w-full md:w-80 bg-white border-t md:border-t-0 md:border-l border-[#c4c5d7] flex flex-col shrink-0">
           <div className="p-6 flex-1 overflow-y-auto space-y-6">
 
             {/* Produk info */}

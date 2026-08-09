@@ -79,138 +79,45 @@
 
     <main class="max-w-7xl mx-auto px-4 lg:px-8 py-8">
         <div class="mb-8">
-            <div class="flex items-center text-[10px] text-stone-400 mb-2 uppercase tracking-widest">
-                <a href="#">Anak</a>
-                <span class="mx-2">/</span>
-                <span class="text-stone-900 dark:text-stone-100">Semua Pakaian</span>
-            </div>
             <h1 class="text-2xl font-light tracking-tight">Koleksi Pakaian Anak</h1>
-            <p class="text-sm text-stone-500 mt-2">Ditemukan 120 produk nyaman untuk si kecil</p>
+            <p class="text-sm text-stone-500 mt-2">Pakaian ceria dan tahan lama untuk petualangan si kecil</p>
         </div>
 
-        <div class="flex flex-col md:flex-row md:items-center justify-between border-y border-stone-200 dark:border-stone-800 py-4 mb-8 space-y-4 md:space-y-0">
-            <div class="flex flex-wrap gap-4">
-                <button class="flex items-center space-x-2 text-sm border border-stone-300 dark:border-stone-700 px-4 py-2 hover:bg-stone-50 dark:hover:bg-stone-900 transition-colors">
-                    <span>Usia (Tahun)</span>
-                    <span class="material-icons-outlined text-sm">expand_more</span>
-                </button>
-                <button class="flex items-center space-x-2 text-sm border border-stone-300 dark:border-stone-700 px-4 py-2 hover:bg-stone-50 dark:hover:bg-stone-900 transition-colors">
-                    <span>Warna Cerah</span>
-                    <span class="material-icons-outlined text-sm">expand_more</span>
-                </button>
+        <div class="flex flex-col md:flex-row justify-between items-end mb-8 gap-6 border-b border-gray-100 dark:border-gray-800 pb-6">
+            <div class="flex flex-wrap gap-6">
+                <button data-filter="all" onclick="filterAction('all')" class="filter-btn active border-b-2 border-black dark:border-white font-bold text-xs uppercase tracking-widest pb-1">Semua</button>
+                <button data-filter="bjp" onclick="filterAction('bjp')" class="filter-btn text-gray-400 font-bold text-xs uppercase tracking-widest pb-1 hover:text-black dark:hover:text-white transition">Kaos</button>
+                <button data-filter="km" onclick="filterAction('km')" class="filter-btn text-gray-400 font-bold text-xs uppercase tracking-widest pb-1 hover:text-black dark:hover:text-white transition">Kemeja</button>
+                <button data-filter="cl" onclick="filterAction('cl')" class="filter-btn text-gray-400 font-bold text-xs uppercase tracking-widest pb-1 hover:text-black dark:hover:text-white transition">Celana</button>
+                <button data-filter="op" onclick="filterAction('op')" class="filter-btn text-gray-400 font-bold text-xs uppercase tracking-widest pb-1 hover:text-black dark:hover:text-white transition">Outerwear</button>
             </div>
-            <div class="flex items-center space-x-4 text-sm">
-                <span class="material-icons-outlined text-base">swap_vert</span>
-                <span>Terpopuler</span>
-            </div>
+            <select id="sortOption" onchange="runFilterAndSort()" class="bg-transparent border-none text-xs font-bold uppercase tracking-widest focus:ring-0 cursor-pointer">
+                <option value="newest">Urutkan: Terbaru</option>
+                <option value="low">Harga: Terendah</option>
+                <option value="high">Harga: Tertinggi</option>
+            </select>
         </div>
 
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-12">
-            
-            <div class="product-card group cursor-pointer animate-on-scroll" onclick="window.location.href='desc.item.html'">
-                <div class="relative aspect-[3/4] overflow-hidden bg-stone-100 dark:bg-stone-900 mb-4">
-                    <img alt="Kaos Anak" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                    src="https://i.pinimg.com/1200x/d2/ce/c5/d2cec53cbe74fd0d560615f2704d37e7.jpg" />
-                    <div class="quick-add absolute bottom-0 left-0 right-0 bg-white/90 dark:bg-black/90 p-4 translate-y-full opacity-0 transition-all duration-300">
-                        <button class="w-full bg-black dark:bg-white text-white dark:text-black py-2 text-xs font-bold uppercase tracking-widest">Tambah Cepat</button>
-                    </div>
-                    <button class="absolute top-4 right-4 text-stone-400 hover:text-primary transition-colors">
-                        <span class="material-icons-outlined">favorite_border</span>
-                    </button>
-                </div>
-                <div class="space-y-2">
-                    <div class="flex gap-1">
-                        <div class="w-4 h-4 rounded-full border border-stone-300 bg-yellow-400"></div>
-                        <div class="w-4 h-4 rounded-full border border-stone-300 bg-blue-400"></div>
-                    </div>
-                    <p class="text-[10px] text-stone-500">Anak, 110cm - 160cm</p>
-                    <h3 class="text-sm font-medium line-clamp-1">Kaos Grafis Katun Lembut</h3>
-                    <span class="text-sm font-bold">Rp149.000</span>
-                </div>
-            </div>
+        <div id="product-container" class="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-12"></div>
 
-            <div class="product-card group cursor-pointer animate-on-scroll" onclick="window.location.href='desc.item.html'">
-                <div class="relative aspect-[3/4] overflow-hidden bg-stone-100 dark:bg-stone-900 mb-4">
-                    <img alt="Jaket Anak" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                    src="https://i.pinimg.com/1200x/9c/9b/ab/9c9bab11c594cf5ac6baf18a844dd44a.jpg" />
-                    <div class="absolute top-0 left-0 bg-primary text-white px-2 py-1 text-[10px] font-bold uppercase">Sale</div>
-                    <div class="quick-add absolute bottom-0 left-0 right-0 bg-white/90 dark:bg-black/90 p-4 translate-y-full opacity-0 transition-all duration-300">
-                        <button class="w-full bg-black dark:bg-white text-white dark:text-black py-2 text-xs font-bold uppercase tracking-widest">Tambah Cepat</button>
-                    </div>
-                </div>
-                <div class="space-y-2">
-                    <div class="flex gap-1">
-                        <div class="w-4 h-4 rounded-full border border-stone-300 bg-stone-800"></div>
-                    </div>
-                    <p class="text-[10px] text-stone-500">Anak, S - XL</p>
-                    <h3 class="text-sm font-medium line-clamp-1">Jaket Parka Ringan Tahan Air</h3>
-                    <div class="flex items-baseline space-x-2">
-                        <span class="text-sm font-bold text-primary">Rp299.000</span>
-                        <span class="text-[10px] text-stone-400 line-through">Rp499.000</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="product-card group cursor-pointer animate-on-scroll" onclick="window.location.href='desc.item.html'">
-                <div class="relative aspect-[3/4] overflow-hidden bg-stone-100 dark:bg-stone-900 mb-4">
-                    <img alt="Kemeja Anak" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                    src="https://i.pinimg.com/1200x/b3/90/3a/b3903aba665eb12fccf09f3b9bb0abf4.jpg" />
-                    <div class="quick-add absolute bottom-0 left-0 right-0 bg-white/90 dark:bg-black/90 p-4 translate-y-full opacity-0 transition-all duration-300">
-                        <button class="w-full bg-black dark:bg-white text-white dark:text-black py-2 text-xs font-bold uppercase tracking-widest">Tambah Cepat</button>
-                    </div>
-                </div>
-                <div class="space-y-2">
-                    <p class="text-[10px] text-stone-500">Anak, 100cm - 150cm</p>
-                    <h3 class="text-sm font-medium line-clamp-1">Kemeja Linen Kerah Tegak</h3>
-                    <span class="text-sm font-bold">Rp199.000</span>
-                </div>
-            </div>
-
-            <div class="product-card group cursor-pointer animate-on-scroll" onclick="window.location.href='desc.item.html'">
-                <div class="relative aspect-[3/4] overflow-hidden bg-stone-100 dark:bg-stone-900 mb-4">
-                    <img alt="Sweatshirt Anak" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                    src="https://i.pinimg.com/736x/96/0f/49/960f49a25184930d08e504bbe2f7b38c.jpg" />
-                    <div class="quick-add absolute bottom-0 left-0 right-0 bg-white/90 dark:bg-black/90 p-4 translate-y-full opacity-0 transition-all duration-300">
-                        <button class="w-full bg-black dark:bg-white text-white dark:text-black py-2 text-xs font-bold uppercase tracking-widest">Tambah Cepat</button>
-                    </div>
-                </div>
-                <div class="space-y-2">
-                    <div class="flex gap-1">
-                        <div class="w-4 h-4 rounded-full border border-stone-300 bg-pink-300"></div>
-                        <div class="w-4 h-4 rounded-full border border-stone-300 bg-green-200"></div>
-                    </div>
-                    <p class="text-[10px] text-stone-500">Anak, All Size</p>
-                    <h3 class="text-sm font-medium line-clamp-1">Sweatshirt Hoodie Fleece</h3>
-                    <span class="text-sm font-bold">Rp249.000</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="mt-20 flex flex-col items-center">
-            <button class="px-12 py-3 border border-stone-900 dark:border-stone-100 text-sm font-bold uppercase tracking-widest hover:bg-stone-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
-                Muat Lebih Banyak
+        <div id="load-more-container" class="mt-16 flex justify-center hidden">
+            <button onclick="loadMoreAction()" class="border border-black px-10 py-4 text-[11px] font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-all duration-300">
+                Tampilkan Lebih Banyak
             </button>
+        </div>
+        <div id="no-more-products" class="mt-8 text-center text-gray-500 hidden">
+            <p class="text-sm">Semua produk telah ditampilkan</p>
         </div>
     </main>
 
     <div id="footer-placeholder"></div>
 
+    <script src="colectiondata/data_anak.js"></script>
+    <script src="collection-loader.js"></script>
     <script src="footer.js"></script>
-
     <script>
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('opacity-100', 'translate-y-0');
-                    entry.target.classList.remove('opacity-0', 'translate-y-8');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.animate-on-scroll').forEach((el) => {
-            el.classList.add('opacity-0', 'translate-y-8', 'transition-all', 'duration-700', 'ease-out');
-            observer.observe(el);
+        document.addEventListener('DOMContentLoaded', function() {
+            window.initCollection({ gender: 'anak', data: window.dataAnak || [] });
         });
     </script>
 </body>

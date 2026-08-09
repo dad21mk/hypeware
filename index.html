@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Modern Fashion Store | Minimalist Collection</title>
+    <title>Modern Fashion Store</title>
     <link rel="icon" type="image/png" href="assets/ .png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Oswald:wght@500;600&amp;display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
@@ -45,56 +45,17 @@
       #overlay {
         transition: opacity 0.3s ease;
       }
+      /* Hide scrollbar for sliders */
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
     </style>
   </head>
 <body class="bg-background-light dark:bg-background-dark text-black dark:text-white font-sans overflow-x-hidden transition-colors duration-300">
-
-    <!DOCTYPE html>
-<html lang="id">
-  <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>HypeWare | Modern Fashion Store</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@500;600&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
-    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
-    <script>
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              primary: "#EE0000",
-              "background-light": "#FFFFFF",
-              "background-dark": "#121212",
-            },
-            fontFamily: {
-              display: ["Oswald", "sans-serif"],
-              sans: ["Inter", "sans-serif"],
-            },
-          },
-        },
-      };
-    </script>
-    <style>
-      /* Smooth transition for Mega Menu */
-      #mega-menu {
-        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        transform: translateY(-5%);
-        opacity: 0;
-        pointer-events: none;
-      }
-      #mega-menu.active {
-        transform: translateY(0);
-        opacity: 1;
-        pointer-events: auto;
-      }
-      #overlay {
-        transition: opacity 0.3s ease;
-      }
-    </style>
-  </head>
-  <header>
     <div id="overlay" class="fixed inset-0 bg-black/50 z-40 opacity-0 pointer-events-none"></div>
 
     <header class="relative bg-white dark:bg-background-dark z-50 border-b border-gray-100 dark:border-stone-800">
@@ -286,21 +247,29 @@
       </div>
     </section>
 
-    <!-- Latest Products -->
+    <!-- Latest Products Slider -->
     <section class="max-w-[1440px] mx-auto px-4 md:px-8 py-16 md:py-24">
-      <div class="flex items-end justify-between mb-12">
+      <div class="flex items-center justify-between mb-8">
         <div>
-          <h2 class="text-3xl font-bold tracking-tight mb-2">Produk Terbaru</h2>
+          <h2 class="text-2xl md:text-3xl font-bold tracking-tight mb-2">Produk Terbaru</h2>
           <div class="h-1 w-12 bg-primary"></div>
         </div>
-        <a class="text-sm font-bold border-b-2 border-slate-900 dark:border-white pb-1 hover:text-primary hover:border-primary transition-all" href="#">
-          Lihat Semua
-        </a>
+        <div class="flex items-center gap-3">
+          <a class="text-xs md:text-sm font-bold border-b-2 border-slate-900 dark:border-white pb-1 hover:text-primary hover:border-primary transition-all hidden sm:inline-block mr-2" href="#">
+            Lihat Semua
+          </a>
+          <button onclick="scrollSlider('produk-slider', -320)" aria-label="Sebelumnya" class="w-10 h-10 rounded-full border border-slate-300 dark:border-slate-700 flex items-center justify-center hover:bg-primary hover:border-primary hover:text-white transition-all shadow-sm cursor-pointer">
+            <span class="material-icons-outlined text-lg">chevron_left</span>
+          </button>
+          <button onclick="scrollSlider('produk-slider', 320)" aria-label="Berikutnya" class="w-10 h-10 rounded-full border border-slate-300 dark:border-slate-700 flex items-center justify-center hover:bg-primary hover:border-primary hover:text-white transition-all shadow-sm cursor-pointer">
+            <span class="material-icons-outlined text-lg">chevron_right</span>
+          </button>
+        </div>
       </div>
 
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+      <div id="produk-slider" class="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar py-2">
         <!-- Product 1 -->
-        <div class="group cursor-pointer animate-on-scroll" onclick="window.location.href='desc.item.html'">
+        <div class="flex-none w-[260px] sm:w-[300px] snap-start group cursor-pointer animate-on-scroll" onclick="window.location.href='desc.item.html'">
           <div class="relative aspect-[3/4] mb-4 overflow-hidden bg-slate-100 dark:bg-slate-900">
             <img
               alt="T-Shirt Kerah Bulat Lengan Pendek"
@@ -327,7 +296,7 @@
         </div>
 
         <!-- Product 2 -->
-        <div class="group cursor-pointer animate-on-scroll" onclick="window.location.href='desc.item.html'">
+        <div class="flex-none w-[260px] sm:w-[300px] snap-start group cursor-pointer animate-on-scroll" onclick="window.location.href='desc.item.html'">
           <div class="relative aspect-[3/4] mb-4 overflow-hidden bg-slate-100 dark:bg-slate-900">
             <img
               alt="Jaket Parka Saku"
@@ -350,7 +319,7 @@
         </div>
 
         <!-- Product 3 -->
-        <div class="group cursor-pointer animate-on-scroll" onclick="window.location.href='desc.item.html'">
+        <div class="flex-none w-[260px] sm:w-[300px] snap-start group cursor-pointer animate-on-scroll" onclick="window.location.href='desc.item.html'">
           <div class="relative aspect-[3/4] mb-4 overflow-hidden bg-slate-100 dark:bg-slate-900">
             <img
               alt="Celana Jeans Selvedge"
@@ -369,19 +338,19 @@
             <p class="text-[11px] text-slate-500 mb-1 uppercase tracking-tighter">Unisex | 28-36</p>
             <h3 class="text-sm font-medium mb-2 group-hover:text-primary transition-colors">Jeans Selvedge Slim Fit</h3>
             <div class="flex gap-2 items-center">
-              <p class="font-bold text-primary">Rp499.000</p>
+              <p class="font-bold text-[#EE0000]">Rp499.000</p>
               <p class="text-xs text-slate-400 line-through">Rp699.000</p>
             </div>
           </div>
         </div>
 
         <!-- Product 4 -->
-        <div class="group cursor-pointer animate-on-scroll" onclick="window.location.href='desc.item.html'">
+        <div class="flex-none w-[260px] sm:w-[300px] snap-start group cursor-pointer animate-on-scroll" onclick="window.location.href='desc.item.html'">
           <div class="relative aspect-[3/4] mb-4 overflow-hidden bg-slate-100 dark:bg-slate-900">
             <img
               alt="Gaun Katun A-Line"
               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmxbwDAaLncpjJptFojdkNrMEMfRZs7n3CPnkncbuvPPcl_UX3T4CjQmtLPoNb76lAD9TDz1NoBN7abOQJdY-ddrj9L6iFLj3EIgw6_fG990BXRAGZrG6Lieo0HuQtSe8Vf4dlK8b8mXGqzFjCWAk0MVMfy9MslId-gxpquTpK-aCFwNdx-JGJysZKSD6dIj3pNVbUT8dFRlFSMNQGAz8ru9TprjIX_L-KImBBDlj8AxYVgz3p7a538pWyIQGg-y-EuMETpDUQ8cLU"
+              src="https://6a783b1f51198decb75276c1.imgix.net/sandbox/820921838330246541.jpg?auto=compress"
             />
             <button class="absolute bottom-4 right-4 bg-white/90 dark:bg-black/90 p-2 opacity-0 group-hover:opacity-100 transition-opacity">
               <span class="material-icons-outlined text-xl">favorite_border</span>
@@ -393,7 +362,7 @@
               <div class="w-4 h-4 rounded-full bg-[#ffffff] border border-slate-300"></div>
             </div>
             <p class="text-[11px] text-slate-500 mb-1 uppercase tracking-tighter">Wanita | S-XL</p>
-            <h3 class="text-sm font-medium mb-2 group-hover:text-primary transition-colors">Gaun Flare Katun Tanpa Lengan</h3>
+            <h3 class="text-sm font-medium mb-2 group-hover:text-primary transition-colors">daster coklat lengan panjang</h3>
             <p class="font-bold">Rp499.000</p>
           </div>
         </div>
@@ -445,11 +414,25 @@
       </div>
     </section>
 
-    <!-- Featured Collections -->
-    <section class="max-w-[1440px] mx-auto px-4 md:px-8 py-24">
-      <h2 class="text-center text-3xl font-bold mb-16 uppercase tracking-[0.3em] font-display">Koleksi Pilihan</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <a class="group relative aspect-[4/5] overflow-hidden" href="colection_wanita.html">
+    <!-- Featured Collections Slider -->
+    <section class="max-w-[1440px] mx-auto px-4 md:px-8 py-20">
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <h2 class="text-2xl md:text-3xl font-bold uppercase tracking-[0.2em] font-display">Koleksi Pilihan</h2>
+          <div class="h-1 w-12 bg-primary mt-2"></div>
+        </div>
+        <div class="flex items-center gap-3">
+          <button onclick="scrollSlider('koleksi-slider', -380)" aria-label="Sebelumnya" class="w-10 h-10 rounded-full border border-slate-300 dark:border-slate-700 flex items-center justify-center hover:bg-primary hover:border-primary hover:text-white transition-all shadow-sm cursor-pointer">
+            <span class="material-icons-outlined text-lg">chevron_left</span>
+          </button>
+          <button onclick="scrollSlider('koleksi-slider', 380)" aria-label="Berikutnya" class="w-10 h-10 rounded-full border border-slate-300 dark:border-slate-700 flex items-center justify-center hover:bg-primary hover:border-primary hover:text-white transition-all shadow-sm cursor-pointer">
+            <span class="material-icons-outlined text-lg">chevron_right</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="koleksi-slider" class="flex gap-6 md:gap-8 overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar py-2">
+        <a class="flex-none w-[280px] sm:w-[350px] md:w-[410px] snap-start group relative aspect-[4/5] overflow-hidden" href="colection_wanita.html">
           <img
             alt="Wanita"
             class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
@@ -461,11 +444,11 @@
             <p class="text-white/80 text-sm mt-2 font-medium">Lihat Koleksi →</p>
           </div>
         </a>
-        <a class="group relative aspect-[4/5] overflow-hidden" href="colection_pria.html">
+        <a class="flex-none w-[280px] sm:w-[350px] md:w-[410px] snap-start group relative aspect-[4/5] overflow-hidden" href="colection_pria.html">
           <img
             alt="Pria"
             class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-            src="asset/cowok/gambar_pria.jpg"
+            src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSVERioXO1e1USQcjPsYvNBrtP8ov3kKsUU4YQGU81D7Y0PdNTdcwPQVnlp4mYOxO-rGFssZllndfsMprczES9L9dQb24fe2Z_9DR6d8KT1"
           />
           <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors"></div>
           <div class="absolute bottom-10 left-10">
@@ -473,7 +456,7 @@
             <p class="text-white/80 text-sm mt-2 font-medium">Lihat Koleksi →</p>
           </div>
         </a>
-        <a class="group relative aspect-[4/5] overflow-hidden" href="colection_anak.html">
+        <a class="flex-none w-[280px] sm:w-[350px] md:w-[410px] snap-start group relative aspect-[4/5] overflow-hidden" href="colection_anak.html">
           <img
             alt="Anak"
             class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
@@ -513,45 +496,24 @@
             </div>
           </div>
           <div>
-            <h4 class="font-bold text-xs uppercase tracking-widest mb-6">Tentang</h4>
+            <h4 class="font-bold text-xs uppercase tracking-widest mb-6">Repositori</h4>
             <ul class="space-y-4 text-sm text-slate-500 dark:text-slate-400">
-              <li><a class="hover:text-primary transition-colors" href="#">Informasi Toko</a></li>
-              <li><a class="hover:text-primary transition-colors" href="#">Karir</a></li>
-              <li><a class="hover:text-primary transition-colors" href="#">Berita</a></li>
-              <li><a class="hover:text-primary transition-colors" href="#">Keberlanjutan</a></li>
+              <li><a class="hover:text-primary transition-colors" href="https://github.com/dad21mk/hypeware" target="_blank">github</a></li>
             </ul>
           </div>
           <div>
-            <h4 class="font-bold text-xs uppercase tracking-widest mb-6">Bantuan</h4>
+            <h4 class="font-bold text-xs uppercase tracking-widest mb-6">Developer</h4>
             <ul class="space-y-4 text-sm text-slate-500 dark:text-slate-400">
-              <li><a class="hover:text-primary transition-colors" href="#">FAQ</a></li>
-              <li><a class="hover:text-primary transition-colors" href="#">Pengembalian</a></li>
-              <li><a class="hover:text-primary transition-colors" href="#">Kebijakan Privasi</a></li>
-              <li><a class="hover:text-primary transition-colors" href="#">Hubungi Kami</a></li>
+              <li><a class="hover:text-primary transition-colors" href="https://github.com/adzkya-fajri" target="_blank">adzkya-fajri</a></li>
+              <li><a class="hover:text-primary transition-colors" href="https://github.com/dad21mk" target="_blank">homple</a></li>
+              <li><a class="hover:text-primary transition-colors" href="https://github.com/WanedaTNA" target="_blank">WanedaTNA</a></li>
             </ul>
           </div>
           <div>
-            <h4 class="font-bold text-xs uppercase tracking-widest mb-6">Akun</h4>
+            <h4 class="font-bold text-xs uppercase tracking-widest mb-6">Sosmed</h4>
             <ul class="space-y-4 text-sm text-slate-500 dark:text-slate-400">
-              <li><a class="hover:text-primary transition-colors" href="#">Profil</a></li>
-              <li><a class="hover:text-primary transition-colors" href="#">Pesanan Saya</a></li>
-              <li><a class="hover:text-primary transition-colors" href="#">Wishlist</a></li>
-              <li><a class="hover:text-primary transition-colors" href="#">Membership</a></li>
+              <li><a class="hover:text-primary transition-colors" href="https://www.instagram.com/hypeware_project" target="_blank">Instagram</a></li>
             </ul>
-          </div>
-          <div class="col-span-2 lg:col-span-1">
-            <h4 class="font-bold text-xs uppercase tracking-widest mb-6">Newsletter</h4>
-            <p class="text-xs text-slate-500 mb-4">Dapatkan info koleksi terbaru dan promo eksklusif.</p>
-            <div class="flex flex-col gap-3">
-              <input
-                class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3 text-sm focus:ring-1 focus:ring-primary outline-none"
-                placeholder="Email Anda"
-                type="email"
-              />
-              <button class="bg-black text-white dark:bg-white dark:text-black py-3 text-xs font-bold uppercase tracking-widest hover:bg-primary hover:text-white transition-all">
-                Berlangganan
-              </button>
-            </div>
           </div>
         </div>
         <div class="pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
@@ -569,7 +531,14 @@
     <script type="module" src="produk.js"></script>
 
     <script>
-      
+      // Slider helper function
+      function scrollSlider(id, amount) {
+        const slider = document.getElementById(id);
+        if (slider) {
+          slider.scrollBy({ left: amount, behavior: 'smooth' });
+        }
+      }
+
       // Intersection Observer for scroll animations
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
